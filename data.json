@@ -5,7 +5,7 @@
     "estadoLote": "DISPONIBLE",
     "posicionLote": {
       "x": 10.0,
-      "y": 20.0,
+      "y": 2.0,
       "z": 5.0
     }
   },
@@ -14,9 +14,9 @@
     "superficie": 1200,
     "estadoLote": "RESERVADO",
     "posicionLote": {
-      "x": 15.0,
-      "y": 25.0,
-      "z": 6.0
+      "x": 40.0,
+      "y": 2.0,
+      "z": 5.0
     }
   }
 ]
