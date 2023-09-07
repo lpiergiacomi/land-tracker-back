@@ -28,12 +28,12 @@ public class LoteController {
     }
 
     @GetMapping
-    public List<Lote> obtenerTodosLosLotes() {
+    public List<LoteDTO> obtenerTodosLosLotes() {
         return loteService.obtenerTodosLosLotes();
     }
 
     @PostMapping
-    public Lote guardarLote(@RequestBody LoteDTO lote) {
+    public LoteDTO guardarLote(@RequestBody LoteDTO lote) {
         return loteService.guardarLote(lote);
     }
 }

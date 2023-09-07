@@ -1,5 +1,6 @@
 package com.api.landtracker.service;
 
+import com.api.landtracker.model.dto.LoteDTO;
 import com.api.landtracker.model.entities.EstadoLote;
 import com.api.landtracker.model.entities.Lote;
 import com.api.landtracker.model.entities.PosicionLote;
@@ -48,7 +49,7 @@ class LoteServiceTest {
         Mockito.when(loteRepository.findAll()).thenReturn(lotes);
 
         //when
-        List<Lote> respLotes = loteService.obtenerTodosLosLotes();
+        List<LoteDTO> respLotes = loteService.obtenerTodosLosLotes();
 
         //verify
 

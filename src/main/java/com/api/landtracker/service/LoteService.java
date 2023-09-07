@@ -18,12 +18,15 @@ public class LoteService {
     private final LoteRepository loteRepository;
     private final LoteMapper loteMapper;
 
-    public List<Lote> obtenerTodosLosLotes() {
-        return loteRepository.findAll();
+    public List<LoteDTO> obtenerTodosLosLotes() {
+        List<Lote> lotes = loteRepository.findAll();
+        List<LoteDTO> loteDTOS = loteMapper.lotesToLotesDTO(lotes);
+        return loteDTOS;
     }
-    public Lote guardarLote(LoteDTO loteDTO) {
+    public LoteDTO guardarLote(LoteDTO loteDTO) {
         Lote lote = loteMapper.loteDTOToLote(loteDTO);
-        return loteRepository.save(lote);
+        LoteDTO loteResponse = loteMapper.loteToLoteDTO(loteRepository.save(lote));
+        return loteResponse;
     }
 
     public LoteDTO obtenerLotePorId(Long id) {

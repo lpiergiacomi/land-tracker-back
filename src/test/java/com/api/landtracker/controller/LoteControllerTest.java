@@ -1,5 +1,7 @@
 package com.api.landtracker.controller;
 
+import com.api.landtracker.model.dto.LoteDTO;
+import com.api.landtracker.model.dto.PosicionLoteDTO;
 import com.api.landtracker.model.entities.EstadoLote;
 import com.api.landtracker.model.entities.Lote;
 import com.api.landtracker.model.entities.PosicionLote;
@@ -47,13 +49,13 @@ public class LoteControllerTest {
 
     @Test
     void obtenerTodosLosLotesTest() throws Exception {
-        List<Lote> lotes = new ArrayList<>();
-        Lote lote = Lote.builder()
+        List<LoteDTO> lotes = new ArrayList<>();
+        LoteDTO lote = LoteDTO.builder()
                 .id(1L)
                 .estadoLote(EstadoLote.DISPONIBLE)
                 .nombre("Un lote")
                 .superficie(1000)
-                .posicionLote(new PosicionLote(1.0,2.0,3.0))
+                .posicionLote(new PosicionLoteDTO(1.0,2.0,3.0))
                 .build();
         lotes.add(lote);
 
