@@ -42,4 +42,25 @@ public class Lote {
     @Embedded
     private PosicionLote posicionLote;
 
+    @Column(name = "metrosFrente")
+    private Double metrosFrente;
+
+    @Column(name = "metrosFondo")
+    private Double metrosFondo;
+
+    @Column(name = "nroCuentaCatastral")
+    private String nroCuentaCatastral;
+
+    @Column(name = "nroCuentaMunicipal")
+    private String nroCuentaMunicipal;
+
+    @Column(name = "tieneLuz")
+    private Boolean tieneLuz;
+
+    @Column(name = "tieneAgua")
+    private Boolean tieneAgua;
+
+    @Column(name = "precio")
+    private Double precio;
+
 }

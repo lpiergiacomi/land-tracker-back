@@ -1,22 +1,172 @@
 [
   {
     "nombre": "Lote 1",
-    "superficie": 1000,
+    "superficie": 500,
     "estadoLote": "DISPONIBLE",
     "posicionLote": {
-      "x": 10.0,
-      "y": 20.0,
-      "z": 5.0
-    }
+      "x": -120,
+      "y": 2.0,
+      "z": -75
+    },
+    "metrosFrente": 20,
+    "metrosFondo": 25,
+    "nroCuentaCatastral": "001-001-001",
+    "nroCuentaMunicipal": "001-001-001",
+    "tieneLuz": true,
+    "tieneAgua": true,
+    "precio": 75000
   },
   {
     "nombre": "Lote 2",
-    "superficie": 1200,
+    "superficie": 600,
+    "estadoLote": "DISPONIBLE",
+    "posicionLote": {
+      "x": -80,
+      "y": 2.0,
+      "z": -75
+    },
+    "metrosFrente": 22,
+    "metrosFondo": 27,
+    "nroCuentaCatastral": "001-001-002",
+    "nroCuentaMunicipal": "001-001-002",
+    "tieneLuz": false,
+    "tieneAgua": true,
+    "precio": 80000
+  },
+  {
+    "nombre": "Lote 3",
+    "superficie": 550,
     "estadoLote": "RESERVADO",
     "posicionLote": {
-      "x": 15.0,
-      "y": 25.0,
-      "z": 6.0
-    }
+      "x": -40,
+      "y": 2.0,
+      "z": -75
+    },
+    "metrosFrente": 18,
+    "metrosFondo": 30,
+    "nroCuentaCatastral": "001-001-003",
+    "nroCuentaMunicipal": "001-001-003",
+    "tieneLuz": true,
+    "tieneAgua": true,
+    "precio": 72000
+  },
+  {
+    "nombre": "Lote 4",
+    "superficie": 700,
+    "estadoLote": "DISPONIBLE",
+    "posicionLote": {
+      "x": 0,
+      "y": 2.0,
+      "z": -75
+    },
+    "metrosFrente": 25,
+    "metrosFondo": 28,
+    "nroCuentaCatastral": "001-001-004",
+    "nroCuentaMunicipal": "001-001-004",
+    "tieneLuz": true,
+    "tieneAgua": false,
+    "precio": 85000
+  },
+  {
+    "nombre": "Lote 5",
+    "superficie": 450,
+    "estadoLote": "VENDIDO",
+    "posicionLote": {
+      "x": 40,
+      "y": 2.0,
+      "z": -75
+    },
+    "metrosFrente": 15,
+    "metrosFondo": 30,
+    "nroCuentaCatastral": "001-001-005",
+    "nroCuentaMunicipal": "001-001-005",
+    "tieneLuz": false,
+    "tieneAgua": false,
+    "precio": 90000
+  },
+  {
+    "nombre": "Lote 6",
+    "superficie": 800,
+    "estadoLote": "DISPONIBLE",
+    "posicionLote": {
+      "x": 80,
+      "y": 2.0,
+      "z": -75
+    },
+    "metrosFrente": 30,
+    "metrosFondo": 27,
+    "nroCuentaCatastral": "001-001-006",
+    "nroCuentaMunicipal": "001-001-006",
+    "tieneLuz": true,
+    "tieneAgua": true,
+    "precio": 95000
+  },
+  {
+    "nombre": "Lote 7",
+    "superficie": 600,
+    "estadoLote": "VENDIDO",
+    "posicionLote": {
+      "x": -120,
+      "y": 2.0,
+      "z": 0
+    },
+    "metrosFrente": 20,
+    "metrosFondo": 30,
+    "nroCuentaCatastral": "001-001-007",
+    "nroCuentaMunicipal": "001-001-007",
+    "tieneLuz": true,
+    "tieneAgua": true,
+    "precio": 88000
+  },
+  {
+    "nombre": "Lote 8",
+    "superficie": 550,
+    "estadoLote": "DISPONIBLE",
+    "posicionLote": {
+      "x": -80,
+      "y": 2.0,
+      "z": 0
+    },
+    "metrosFrente": 18,
+    "metrosFondo": 30,
+    "nroCuentaCatastral": "001-001-008",
+    "nroCuentaMunicipal": "001-001-008",
+    "tieneLuz": true,
+    "tieneAgua": false,
+    "precio": 72000
+  },
+  {
+    "nombre": "Lote 9",
+    "superficie": 700,
+    "estadoLote": "RESERVADO",
+    "posicionLote": {
+      "x": -40,
+      "y": 2.0,
+      "z": 0
+    },
+    "metrosFrente": 25,
+    "metrosFondo": 28,
+    "nroCuentaCatastral": "001-001-009",
+    "nroCuentaMunicipal": "001-001-009",
+    "tieneLuz": false,
+    "tieneAgua": true,
+    "precio": 85000
+  },
+  {
+    "nombre": "Lote 10",
+    "superficie": 450,
+    "estadoLote": "DISPONIBLE",
+    "posicionLote": {
+      "x": 0,
+      "y": 2.0,
+      "z": 0
+    },
+    "metrosFrente": 15,
+    "metrosFondo": 25,
+    "nroCuentaCatastral": "001-001-010",
+    "nroCuentaMunicipal": "001-001-010",
+    "tieneLuz": true,
+    "tieneAgua": true,
+    "precio": 90000
   }
 ]
