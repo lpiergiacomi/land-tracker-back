@@ -25,4 +25,10 @@ public class LoteService {
         Lote lote = loteMapper.loteDTOToLote(loteDTO);
         return loteRepository.save(lote);
     }
+
+    public LoteDTO obtenerLotePorId(Long id) {
+        Lote lote = loteRepository.getReferenceById(id);
+        LoteDTO loteDTO = loteMapper.loteToLoteDTO(lote);
+        return loteDTO;
+    }
 }

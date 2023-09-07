@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 
 @Data
@@ -18,14 +19,16 @@ import javax.persistence.Embedded;
 public class LoteDTO {
 
     private Long id;
-
     private String nombre;
-
     private Integer superficie;
-
     private EstadoLote estadoLote;
-
-    @Embedded
     private PosicionLoteDTO posicionLote;
+    private Double metrosFrente;
+    private Double metrosFondo;
+    private String nroCuentaCatastral;
+    private String nroCuentaMunicipal;
+    private Boolean tieneLuz;
+    private Boolean tieneAgua;
+    private Double precio;
 
 }
