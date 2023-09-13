@@ -24,6 +24,8 @@ import static org.hamcrest.Matchers.*;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -65,5 +67,30 @@ public class LoteControllerTest {
         mockMvc.perform(get("/api/lotes"))
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$.length()", is(lotes.size())));
+    }
+
+    @Test
+    void obtenerLotePorIdTest() throws Exception {
+        LoteDTO lote = LoteDTO.builder()
+                .id(1L)
+                .estadoLote(EstadoLote.DISPONIBLE)
+                .nombre("Un lote")
+                .superficie(1000)
+                .posicionLote(new PosicionLoteDTO(1.0, 2.0, 3.0))
+                .build();
+
+        when(loteService.obtenerLotePorId(1L)).thenReturn(lote);
+
+        mockMvc.perform(get("/api/lotes/{id}", 1L))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.estadoLote").value("DISPONIBLE"))
+                .andExpect(jsonPath("$.nombre").value("Un lote"))
+                .andExpect(jsonPath("$.superficie").value(1000))
+                .andExpect(jsonPath("$.posicionLote.x").value(1.0))
+                .andExpect(jsonPath("$.posicionLote.y").value(2.0))
+                .andExpect(jsonPath("$.posicionLote.z").value(3.0));
+
+        verify(loteService, times(1)).obtenerLotePorId(1L);
     }
 }
