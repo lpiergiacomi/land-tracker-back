@@ -44,7 +44,7 @@ public class LoteController {
         return loteService.guardarLote(lote);
     }
 
-    @GetMapping("/filter")
+    @PostMapping("/filter")
     public ResponseEntity<Page<LoteDTO>> pages(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "200") int size,

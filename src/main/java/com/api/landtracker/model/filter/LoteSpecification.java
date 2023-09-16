@@ -42,7 +42,7 @@ public class LoteSpecification {
             } else {
                 List<Predicate> predicates = new ArrayList<>();
                 stagesNames.forEach(stage -> {
-                    predicates.add(builder.equal(root.get("estado_lote"), stage));
+                    predicates.add(builder.equal(root.get("estadoLote"), stage));
                 });
 
                 return builder.or(predicates.toArray(new Predicate[0]));
