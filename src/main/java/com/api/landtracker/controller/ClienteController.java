@@ -15,7 +15,7 @@ import java.util.List;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping("/api/clientes")
+@RequestMapping("/clientes")
 @RequiredArgsConstructor
 public class ClienteController {
 
