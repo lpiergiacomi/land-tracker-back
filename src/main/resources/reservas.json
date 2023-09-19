@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "cliente": {
+      "id": 1
+    },
+    "lote": {
+      "id": 1
+    }
+  },
+  {
+    "id": 2,
+    "cliente": {
+      "id": 1
+    },
+    "lote": {
+      "id": 2
+    }
+  },
+  {
+    "id": 3,
+    "cliente": {
+      "id": 1
+    },
+    "lote": {
+      "id": 3
+    }
+  },
+  {
+    "id": 4,
+    "cliente": {
+      "id": 1
+    },
+    "lote": {
+      "id": 4
+    }
+  },
+  {
+    "id": 5,
+    "cliente": {
+      "id": 2
+    },
+    "lote": {
+      "id": 5
+    }
+  },
+  {
+    "id": 6,
+    "cliente": {
+      "id": 2
+    },
+    "lote": {
+      "id": 6
+    }
+  }
+]
