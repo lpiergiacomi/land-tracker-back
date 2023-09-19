@@ -1,7 +1,6 @@
 package com.api.landtracker.controller;
 
 import com.api.landtracker.model.dto.LoteDTO;
-import com.api.landtracker.model.entities.Lote;
 import com.api.landtracker.model.filter.LoteFilterParams;
 import com.api.landtracker.service.LoteService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -50,11 +48,11 @@ public class LoteController {
             @RequestParam(defaultValue = "200") int size,
             @RequestParam(defaultValue = "nombre") String order,
             @RequestParam(defaultValue = "true") boolean asc,
-            @RequestBody LoteFilterParams movementParams) {
+            @RequestBody LoteFilterParams loteParams) {
 
-        Page<LoteDTO> movements = loteService.obtenerLotesConFiltro(movementParams,
+        Page<LoteDTO> lotes = loteService.obtenerLotesConFiltro(loteParams,
                 PageRequest.of(page, size, Sort.by(order)));
-        return ok(movements);
+        return ok(lotes);
     }
 
 }
