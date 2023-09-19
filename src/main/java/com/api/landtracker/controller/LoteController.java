@@ -23,7 +23,7 @@ import java.util.Optional;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping("/api/lotes")
+@RequestMapping("/lotes")
 @RequiredArgsConstructor
 public class LoteController {
 

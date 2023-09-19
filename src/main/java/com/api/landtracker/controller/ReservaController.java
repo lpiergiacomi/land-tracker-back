@@ -1,7 +1,8 @@
 package com.api.landtracker.controller;
 
-import com.api.landtracker.model.entities.Cliente;
-import com.api.landtracker.service.ClienteService;
+import com.api.landtracker.model.dto.ReservaDTO;
+import com.api.landtracker.model.entities.Reserva;
+import com.api.landtracker.service.ReservaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,20 +13,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("/reservas")
 @RequiredArgsConstructor
-public class ClienteController {
+public class ReservaController {
 
-    private final ClienteService clienteService;
+
+    private final ReservaService reservaService;
 
     @GetMapping
-    public List<Cliente> obtenerTodosLosClientes() {
-        return clienteService.obtenerTodosLosClientes();
+    public List<ReservaDTO> obtenerTodasLasReservas() {
+        return reservaService.obtenerTodosLasReservas();
     }
 
     @PostMapping
-    public Cliente guardarCliente(@RequestBody Cliente cliente) {
-        return clienteService.guardarCliente(cliente);
+    public Reserva guardarReserva(@RequestBody Reserva reserva) {
+        return reservaService.guardarReserva(reserva);
     }
-
 }
