@@ -1,13 +1,18 @@
 package com.api.landtracker.init;
 
+import com.api.landtracker.model.entities.Cliente;
 import com.api.landtracker.model.entities.Lote;
+import com.api.landtracker.repository.ClienteRepository;
 import com.api.landtracker.repository.LoteRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.context.annotation.Profile;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -16,29 +21,27 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @Component
-//@Profile("data-init")
-public class DataInitializer implements ApplicationRunner {
+@RequiredArgsConstructor
+public class DataInitializer implements ApplicationListener<ApplicationReadyEvent> {
 
     private final LoteRepository loteRepository;
-
-    @Autowired
-    public DataInitializer(LoteRepository loteRepository) {
-        this.loteRepository = loteRepository;
-    }
-
+    private final ClienteRepository clienteRepository;
+    private final ObjectMapper objectMapper = new ObjectMapper();
     @Override
-    public void run(ApplicationArguments args) {
-        cargarDatosDesdeJSON("data.json");
+    public void onApplicationEvent(ApplicationReadyEvent event) {
+        cargarDesdeJson("clientes.json", Cliente.class, clienteRepository);
+        cargarDesdeJson("lotes.json", Lote.class, loteRepository);
     }
 
-    private void cargarDatosDesdeJSON(String jsonFilePath) {
+    private <T> void cargarDesdeJson(String jsonFilePath, Class<?> clase,  JpaRepository<T, ?> repository) {
         try {
-            String jsonContent = new String(Files.readAllBytes(Paths.get(jsonFilePath)));
-            ObjectMapper objectMapper = new ObjectMapper();
-            List<Lote> lotes = objectMapper.readValue(jsonContent, new TypeReference<>() {
-            });
+            ClassPathResource resource = new ClassPathResource(jsonFilePath);
 
-            loteRepository.saveAll(lotes);
+            System.out.println("Ruta del archivo JSON: " + resource.getURL().getPath());
+
+            List<T> objetos = objectMapper.readValue(resource.getInputStream(),
+                    objectMapper.getTypeFactory().constructCollectionType(List.class, clase));
+            repository.saveAll(objetos);
         } catch (IOException e) {
             e.printStackTrace();
         }
