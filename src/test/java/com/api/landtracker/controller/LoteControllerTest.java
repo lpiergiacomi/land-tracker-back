@@ -64,7 +64,7 @@ public class LoteControllerTest {
         when(loteService.obtenerTodosLosLotes()).thenReturn(lotes);
 
         //when
-        mockMvc.perform(get("/api/lotes"))
+        mockMvc.perform(get("/lotes"))
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$.length()", is(lotes.size())));
     }
@@ -81,7 +81,7 @@ public class LoteControllerTest {
 
         when(loteService.obtenerLotePorId(1L)).thenReturn(lote);
 
-        mockMvc.perform(get("/api/lotes/{id}", 1L))
+        mockMvc.perform(get("/lotes/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.estadoLote").value("DISPONIBLE"))
