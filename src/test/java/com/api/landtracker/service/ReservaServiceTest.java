@@ -44,8 +44,8 @@ public class ReservaServiceTest {
         Reserva reserva1 = Reserva.builder().id(1L).cliente(cliente1).lote(lote1).build();
         Reserva reserva2 = Reserva.builder().id(2L).cliente(cliente2).lote(lote2).build();
 
-        ReservaDTO reservaDTO1 = ReservaDTO.builder().id(1L).clienteId(cliente1.getId()).loteId(lote1.getId()).build();
-        ReservaDTO reservaDTO2 = ReservaDTO.builder().id(2L).clienteId(cliente2.getId()).loteId(lote2.getId()).build();
+        ReservaDTO reservaDTO1 = ReservaDTO.builder().id(1L).idCliente(cliente1.getId()).idLote(lote1.getId()).build();
+        ReservaDTO reservaDTO2 = ReservaDTO.builder().id(2L).idCliente(cliente2.getId()).idLote(lote2.getId()).build();
 
         List<Reserva> reservas = Arrays.asList(reserva1, reserva2);
         List<ReservaDTO> reservaDTOs = Arrays.asList(reservaDTO1, reservaDTO2);

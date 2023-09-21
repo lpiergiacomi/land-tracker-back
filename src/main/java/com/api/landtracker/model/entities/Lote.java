@@ -68,7 +68,7 @@ public class Lote {
     private Double precio;
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente", nullable = false)
+    @JoinColumn(name = "cliente")
     private Cliente cliente;
 
 }

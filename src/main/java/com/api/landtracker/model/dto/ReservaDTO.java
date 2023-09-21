@@ -1,5 +1,6 @@
 package com.api.landtracker.model.dto;
 
+import com.api.landtracker.model.entities.EstadoLote;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +13,8 @@ import lombok.NoArgsConstructor;
 public class ReservaDTO {
 
     private Long id;
-    private Long clienteId;
-    private Long loteId;
+    private Long idCliente;
+    private Long idLote;
     private String nombreLote;
     private String nombreCliente;
-
 }

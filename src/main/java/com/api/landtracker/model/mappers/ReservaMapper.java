@@ -5,15 +5,14 @@ import com.api.landtracker.model.entities.Reserva;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ReservaMapper {
 
-    @Mapping(source = "cliente.id", target = "clienteId")
-    @Mapping(source = "lote.id", target = "loteId")
+    @Mapping(source = "cliente.id", target = "idCliente")
+    @Mapping(source = "lote.id", target = "idLote")
     ReservaDTO reservaToReservaDTO(Reserva reserva);
 
     @InheritInverseConfiguration

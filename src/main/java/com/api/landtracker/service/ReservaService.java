@@ -1,8 +1,12 @@
 package com.api.landtracker.service;
 
 import com.api.landtracker.model.dto.ReservaDTO;
+import com.api.landtracker.model.entities.Cliente;
+import com.api.landtracker.model.entities.EstadoLote;
+import com.api.landtracker.model.entities.Lote;
 import com.api.landtracker.model.entities.Reserva;
 import com.api.landtracker.model.mappers.ReservaMapper;
+import com.api.landtracker.repository.LoteRepository;
 import com.api.landtracker.repository.ReservaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,7 @@ import java.util.List;
 public class ReservaService {
 
     private final ReservaRepository reservaRepository;
+    private final LoteRepository loteRepository;
     private final ReservaMapper mapper;
 
     public List<ReservaDTO> obtenerTodosLasReservas() {
@@ -24,6 +29,13 @@ public class ReservaService {
     @Transactional
     public ReservaDTO guardarReserva(ReservaDTO reserva) {
         Reserva newReserva = mapper.reservaDTOToReserva(reserva);
+        Lote lote = loteRepository.findById(reserva.getIdLote()).orElseThrow(
+                () -> new RuntimeException("No se encontró un lote con ese id"));
+        lote.setEstadoLote(EstadoLote.RESERVADO);
+        Cliente cliente = new Cliente();
+        cliente.setId(reserva.getIdCliente());
+        lote.setCliente(cliente);
+        loteRepository.save(lote);
         return mapper.reservaToReservaDTO(reservaRepository.save(newReserva));
     }
 }
