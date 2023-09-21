@@ -26,7 +26,7 @@ public class ReservaController {
     }
 
     @PostMapping
-    public Reserva guardarReserva(@RequestBody Reserva reserva) {
+    public ReservaDTO guardarReserva(@RequestBody ReservaDTO reserva) {
         return reservaService.guardarReserva(reserva);
     }
 }

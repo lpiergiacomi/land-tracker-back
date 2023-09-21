@@ -1,8 +1,8 @@
 package com.api.landtracker.service;
 
 import com.api.landtracker.model.entities.Cliente;
+import com.api.landtracker.model.filter.ClienteFilterParams;
 import com.api.landtracker.model.filter.ClienteSpecification;
-import com.api.landtracker.model.filter.LoteFilterParams;
 import com.api.landtracker.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,7 +12,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,7 +30,7 @@ public class ClienteService {
         return this.clienteRepository.findAll();
     }
 
-    public Page<Cliente> obtenerClientesConFiltro(LoteFilterParams params, Pageable pageable) {
+    public Page<Cliente> obtenerClientesConFiltro(ClienteFilterParams params, Pageable pageable) {
 
         Specification<Cliente> nombreLike = ClienteSpecification.clienteNombreLike(params.getNombre());
 

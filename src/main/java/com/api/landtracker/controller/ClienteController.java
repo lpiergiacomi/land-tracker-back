@@ -1,7 +1,7 @@
 package com.api.landtracker.controller;
 
 import com.api.landtracker.model.entities.Cliente;
-import com.api.landtracker.model.filter.LoteFilterParams;
+import com.api.landtracker.model.filter.ClienteFilterParams;
 import com.api.landtracker.service.ClienteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -32,7 +32,7 @@ public class ClienteController {
             @RequestParam(defaultValue = "200") int size,
             @RequestParam(defaultValue = "nombre") String order,
             @RequestParam(defaultValue = "true") boolean asc,
-            @RequestBody LoteFilterParams clienteParams) {
+            @RequestBody ClienteFilterParams clienteParams) {
 
         Page<Cliente> clientes = clienteService.obtenerClientesConFiltro(clienteParams,
                 PageRequest.of(page, size, Sort.by(order)));

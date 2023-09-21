@@ -15,5 +15,6 @@ public class ReservaDTO {
     private Long clienteId;
     private Long loteId;
     private String nombreLote;
+    private String nombreCliente;
 
 }
