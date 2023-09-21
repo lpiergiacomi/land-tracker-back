@@ -6,6 +6,7 @@ import com.api.landtracker.model.entities.Lote;
 import com.api.landtracker.model.entities.Reserva;
 import com.api.landtracker.model.mappers.ReservaMapper;
 import com.api.landtracker.model.mappers.ReservaMapperImpl;
+import com.api.landtracker.repository.LoteRepository;
 import com.api.landtracker.repository.ReservaRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -29,6 +31,8 @@ public class ReservaServiceTest {
 
     @Mock
     private ReservaRepository reservaRepository;
+    @Mock
+    private LoteRepository loteRepository;
 
     @Spy
     private ReservaMapper reservaMapper = new ReservaMapperImpl();
@@ -73,6 +77,8 @@ public class ReservaServiceTest {
         when(reservaMapper.reservaDTOToReserva(reservaDTO)).thenReturn(reservaParaGuardar);
         when(reservaMapper.reservaToReservaDTO(reservaParaGuardar)).thenReturn(reservaDTO);
         when(reservaRepository.save(reservaParaGuardar)).thenReturn(reservaParaGuardar);
+        when(loteRepository.findById(1L)).thenReturn(Optional.ofNullable(lote));
+        when(loteRepository.save(lote)).thenReturn(lote);
 
         //when
         ReservaDTO resultado = reservaService.guardarReserva(reservaDTO);
