@@ -6,24 +6,33 @@
     },
     "lote": {
       "id": 3
-    }
+    },
+    "numero": "00000001",
+    "fechaVencimiento": "2023-12-31",
+    "fechaCreacion": "2023-09-25"
   },
   {
     "id": 2,
     "cliente": {
-      "id": 1
+      "id": 2
     },
     "lote": {
       "id": 10
-    }
+    },
+    "numero": "00000002",
+    "fechaVencimiento": "2023-11-30",
+    "fechaCreacion": "2023-09-25"
   },
   {
     "id": 3,
     "cliente": {
-      "id": 1
+      "id": 3
     },
     "lote": {
       "id": 13
-    }
+    },
+    "numero": "00000003",
+    "fechaVencimiento": "2023-10-31",
+    "fechaCreacion": "2023-09-25"
   }
 ]

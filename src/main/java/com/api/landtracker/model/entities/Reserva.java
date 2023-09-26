@@ -17,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -41,5 +43,14 @@ public class Reserva implements Serializable {
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name = "lote", nullable = false)
     private Lote lote;
+
+    @Column(name = "numero", unique = true)
+    private String numero;
+
+    @Column(name = "fecha_vencimiento")
+    private LocalDate fechaVencimiento;
+
+    @Column(name = "fecha_creacion")
+    private LocalDate fechaCreacion;
 
 }

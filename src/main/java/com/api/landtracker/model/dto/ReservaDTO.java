@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,4 +20,6 @@ public class ReservaDTO {
     private Long idLote;
     private String nombreLote;
     private String nombreCliente;
+    private String numero;
+    private LocalDate fechaVencimiento;
 }

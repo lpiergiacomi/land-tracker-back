@@ -30,4 +30,15 @@ public class Cliente {
     @Column(name = "nombre")
     private String nombre;
 
+    @Column(name = "email", unique = true)
+    private String email;
+
+    @Column(name = "telefono")
+    private String telefono;
+
+    @Column(name = "direccion")
+    private String direccion;
+
+    @Column(name = "documento")
+    private Long documento;
 }
