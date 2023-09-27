@@ -33,9 +33,11 @@ public class ClienteService {
     public Page<Cliente> obtenerClientesConFiltro(ClienteFilterParams params, Pageable pageable) {
 
         Specification<Cliente> nombreLike = ClienteSpecification.clienteNombreLike(params.getNombre());
+        Specification<Cliente> emailLike = ClienteSpecification.emailLike(params.getNombre());
+        Specification<Cliente> documentoLike = ClienteSpecification.documentoLike(params.getNombre());
 
         Page<Cliente> clientePage = this.clienteRepository.findAll(
-                Specification.where(nombreLike),
+                Specification.where(nombreLike).or(documentoLike).or(emailLike),
                 pageable);
 
         return new PageImpl<Cliente>(clientePage.getContent(), pageable, clientePage.getTotalElements());

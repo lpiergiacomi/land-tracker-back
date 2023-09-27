@@ -16,4 +16,20 @@ public class ClienteSpecification {
                         );
     }
 
+    public static Specification<Cliente> emailLike(String email) {
+        return (root, query, builder) ->
+                email == null || email.equals("") ?
+                        builder.conjunction() :
+                        builder.like(builder.lower(root.get("email")),
+                                "%" + email.toLowerCase() + "%"
+                        );
+    }
+
+    public static Specification<Cliente> documentoLike(String dni) {
+        return (root, query, builder) ->
+                dni == null || dni.equals("") ?
+                        builder.conjunction() :
+                        builder.like(builder.concat("", root.get("documento")), "%" + dni + "%");
+    }
+
 }
