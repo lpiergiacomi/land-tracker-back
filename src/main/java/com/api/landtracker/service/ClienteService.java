@@ -42,4 +42,9 @@ public class ClienteService {
 
         return new PageImpl<Cliente>(clientePage.getContent(), pageable, clientePage.getTotalElements());
     }
+
+    public void eliminarCliente(Long id) {
+
+        clienteRepository.deleteById(id);
+    }
 }

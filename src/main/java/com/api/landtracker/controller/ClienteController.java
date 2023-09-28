@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.ResponseEntity.badRequest;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
@@ -41,6 +42,17 @@ public class ClienteController {
     @PostMapping
     public Cliente guardarCliente(@RequestBody Cliente cliente) {
         return clienteService.guardarCliente(cliente);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> eliminarCliente(@PathVariable Long id) {
+
+        try {
+            clienteService.eliminarCliente(id);
+            return ok("");
+        }
+        catch (Exception e){
+            return badRequest().build();
+        }
     }
 
 }
