@@ -1,9 +1,15 @@
 package com.api.landtracker.service;
 
 import com.api.landtracker.model.entities.Cliente;
+import com.api.landtracker.model.entities.Lote;
+import com.api.landtracker.model.entities.Reserva;
 import com.api.landtracker.model.filter.ClienteFilterParams;
 import com.api.landtracker.model.filter.ClienteSpecification;
 import com.api.landtracker.repository.ClienteRepository;
+import com.api.landtracker.repository.LoteRepository;
+import com.api.landtracker.repository.ReservaRepository;
+import com.api.landtracker.utils.exception.DataValidationException;
+import com.api.landtracker.utils.exception.RecordNotFoundHttpException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -19,6 +25,8 @@ import java.util.List;
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;
+    private final LoteRepository loteRepository;
+    private final ReservaRepository reservaRepository;
 
     @Transactional
     public Cliente guardarCliente(Cliente cliente){
@@ -43,8 +51,16 @@ public class ClienteService {
         return new PageImpl<Cliente>(clientePage.getContent(), pageable, clientePage.getTotalElements());
     }
 
-    public void eliminarCliente(Long id) {
+    public void eliminarCliente(Long id) throws DataValidationException {
 
-        clienteRepository.deleteById(id);
+        Cliente cliente = clienteRepository.findById(id).orElseThrow(
+                () -> new RecordNotFoundHttpException("No existe un cliente con Id: " + id));
+        List<Lote> lotes = loteRepository.findLotesByClienteId(id);
+        List<Reserva> reservas = reservaRepository.findReservasByClienteId(id);
+        if (!lotes.isEmpty() || !reservas.isEmpty()){
+            throw new DataValidationException("No es posible eliminar. Existen lotes o reservas relacionadas con el cliente que desea eliminar");
+        } else {
+            clienteRepository.deleteById(id);
+        }
     }
 }

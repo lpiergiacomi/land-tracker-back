@@ -3,6 +3,8 @@ package com.api.landtracker.controller;
 import com.api.landtracker.model.entities.Cliente;
 import com.api.landtracker.model.filter.ClienteFilterParams;
 import com.api.landtracker.service.ClienteService;
+import com.api.landtracker.utils.ApiResponse;
+import com.api.landtracker.utils.exception.DataValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.ResponseEntity.badRequest;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
@@ -44,15 +45,10 @@ public class ClienteController {
         return clienteService.guardarCliente(cliente);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminarCliente(@PathVariable Long id) {
-
-        try {
-            clienteService.eliminarCliente(id);
-            return ok("");
-        }
-        catch (Exception e){
-            return badRequest().build();
-        }
+    public ResponseEntity<ApiResponse<String>> eliminarCliente(@PathVariable Long id) throws DataValidationException {
+        clienteService.eliminarCliente(id);
+        ApiResponse<String> response = new ApiResponse("success", "ok", "");
+        return ok(response);
     }
 
 }

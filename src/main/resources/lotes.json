@@ -188,7 +188,7 @@
     "tieneAgua": true,
     "precio": 85000.0,
     "cliente":{
-      "id":1
+      "id":2
     }
   },
   {
@@ -248,7 +248,7 @@
     "tieneAgua": true,
     "precio": 93000.0,
     "cliente":{
-      "id":1
+      "id":3
     }
   },
   {
