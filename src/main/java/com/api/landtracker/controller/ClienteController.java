@@ -47,7 +47,7 @@ public class ClienteController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<String>> eliminarCliente(@PathVariable Long id) throws DataValidationException {
         clienteService.eliminarCliente(id);
-        ApiResponse<String> response = new ApiResponse("success", "ok", "");
+        ApiResponse<String> response = new ApiResponse<>("success", "ok", "");
         return ok(response);
     }
 

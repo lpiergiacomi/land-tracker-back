@@ -23,6 +23,24 @@ public class LoteSpecification {
                                 "%" + name.toLowerCase() + "%"
                         );
     }
+
+    public static Specification<Lote> loteNroCuentaCatastralLike(String nroCuentaCatastral) {
+        return (root, query, builder) ->
+                nroCuentaCatastral == null || nroCuentaCatastral.equals("") ?
+                        builder.conjunction() :
+                        builder.like(builder.lower(root.get("nroCuentaCatastral")),
+                                "%" + nroCuentaCatastral.toLowerCase() + "%"
+                        );
+    }
+
+    public static Specification<Lote> loteNroCuentaMunicipalLike(String nroCuentaMunicipal) {
+        return (root, query, builder) ->
+                nroCuentaMunicipal == null || nroCuentaMunicipal.equals("") ?
+                        builder.conjunction() :
+                        builder.like(builder.lower(root.get("nroCuentaMunicipal")),
+                                "%" + nroCuentaMunicipal.toLowerCase() + "%"
+                        );
+    }
     public static Specification<Lote> precioEntreMinMax(Double precioMin, Double precioMax) {
         return (root, query, builder) -> {
 

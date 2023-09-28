@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
         response.setStatus("error");
         response.setMessage(ex.getMessage());
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
     @ExceptionHandler(HttpException.class)
