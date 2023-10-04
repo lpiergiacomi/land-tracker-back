@@ -4,7 +4,7 @@ import com.api.landtracker.model.entities.EstadoLote;
 import com.api.landtracker.model.entities.Lote;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
