@@ -3,6 +3,7 @@ package com.api.landtracker.config.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -13,6 +14,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+
 
 @Configuration
 @EnableWebSecurity
@@ -23,6 +26,8 @@ public class SecurityConfig {
     private final JwtUtil jwtUtil;
     private final MyUserDetailsService myUserDetailsService;
     private final JwtTokenFilter jwtTokenFilter;
+
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -40,11 +45,13 @@ public class SecurityConfig {
                 .addFilter(userAuthenticationFilter)
                 .authorizeHttpRequests(
                         a ->
-                                a.requestMatchers("/auth/register")
+                                a.requestMatchers("/auth/register", "/auth/login")
                                         .permitAll()
                                         .anyRequest()
                                         .authenticated())
-                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .exceptionHandling(e -> e.authenticationEntryPoint(customAuthenticationEntryPoint));
+
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
