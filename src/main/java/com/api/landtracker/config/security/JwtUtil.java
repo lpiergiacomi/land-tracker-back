@@ -51,7 +51,7 @@ public class JwtUtil {
         return JWT.create()
                 .withSubject(((User) authResult.getPrincipal()).getUsername())
                 .withIssuer("land-tracker")
-                .withExpiresAt(new Date(new Date().getTime() + 1000000))
+                .withExpiresAt(new Date(new Date().getTime() + 28800000)) //8 horas
                 .withIssuedAt(new Date())
                 .withClaim("roles", roles)
                 .sign(algorithm);
