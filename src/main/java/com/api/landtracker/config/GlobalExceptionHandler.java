@@ -3,6 +3,7 @@ package com.api.landtracker.config;
 import com.api.landtracker.utils.ApiResponse;
 import com.api.landtracker.utils.exception.DataValidationException;
 import com.api.landtracker.utils.exception.HttpException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -22,6 +23,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DataValidationException.class)
     public ResponseEntity<ApiResponse<Void>> handleDataValidationException(Exception ex) {
+        ApiResponse<Void> response = new ApiResponse<>();
+        response.setStatus("error");
+        response.setMessage(ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ApiResponse<Void>> handleDataIntegrityViolationException(Exception ex) {
         ApiResponse<Void> response = new ApiResponse<>();
         response.setStatus("error");
         response.setMessage(ex.getMessage());
