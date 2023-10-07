@@ -40,5 +40,5 @@ public class Cliente {
     private String direccion;
 
     @Column(name = "documento")
-    private Long documento;
+    private String documento;
 }
