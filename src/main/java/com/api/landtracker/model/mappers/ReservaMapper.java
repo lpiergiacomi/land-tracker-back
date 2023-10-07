@@ -12,7 +12,9 @@ import java.util.List;
 public interface ReservaMapper {
 
     @Mapping(source = "cliente.id", target = "idCliente")
+    @Mapping(source = "cliente.nombre", target = "nombreCliente")
     @Mapping(source = "lote.id", target = "idLote")
+    @Mapping(source = "lote.nombre", target = "nombreLote")
     ReservaDTO reservaToReservaDTO(Reserva reserva);
 
     @InheritInverseConfiguration
