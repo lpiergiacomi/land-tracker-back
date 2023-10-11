@@ -1,8 +1,10 @@
 package com.api.landtracker.controller;
 
 import com.api.landtracker.model.entities.Cliente;
-import com.api.landtracker.model.filter.LoteFilterParams;
+import com.api.landtracker.model.filter.ClienteFilterParams;
 import com.api.landtracker.service.ClienteService;
+import com.api.landtracker.utils.ApiResponse;
+import com.api.landtracker.utils.exception.DataValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,7 +34,7 @@ public class ClienteController {
             @RequestParam(defaultValue = "200") int size,
             @RequestParam(defaultValue = "nombre") String order,
             @RequestParam(defaultValue = "true") boolean asc,
-            @RequestBody LoteFilterParams clienteParams) {
+            @RequestBody ClienteFilterParams clienteParams) {
 
         Page<Cliente> clientes = clienteService.obtenerClientesConFiltro(clienteParams,
                 PageRequest.of(page, size, Sort.by(order)));
@@ -41,6 +43,12 @@ public class ClienteController {
     @PostMapping
     public Cliente guardarCliente(@RequestBody Cliente cliente) {
         return clienteService.guardarCliente(cliente);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<String>> eliminarCliente(@PathVariable Long id) throws DataValidationException {
+        clienteService.eliminarCliente(id);
+        ApiResponse<String> response = new ApiResponse<>("success", "ok", "");
+        return ok(response);
     }
 
 }

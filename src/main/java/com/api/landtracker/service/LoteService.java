@@ -13,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,11 +47,13 @@ public class LoteService {
 
         Specification<Lote> stagesEquals = LoteSpecification.estadoIgualIn(params.getEstados());
         Specification<Lote> nombreLike = LoteSpecification.loteNombreLike(params.getNombre());
+        Specification<Lote> nroCuentaMunicipalLike = LoteSpecification.loteNroCuentaMunicipalLike(params.getNombre());
+        Specification<Lote> nroCuentaCatastralLike = LoteSpecification.loteNroCuentaCatastralLike(params.getNombre());
         Specification<Lote> precioBetweenMinMax = LoteSpecification.precioEntreMinMax(params.getPrecioMin(), params.getPrecioMax());
 
         Page<Lote> lotePage = this.loteRepository.findAll(
                 Specification.where(stagesEquals)
-                .and(nombreLike)
+                .and(nombreLike.or(nroCuentaMunicipalLike).or(nroCuentaCatastralLike))
                 .and(precioBetweenMinMax),
                 pageable);
 

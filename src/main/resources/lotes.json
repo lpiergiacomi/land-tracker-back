@@ -15,10 +15,7 @@
     "nroCuentaMunicipal": "001-001-001",
     "tieneLuz": true,
     "tieneAgua": true,
-    "precio": 75000.0,
-    "cliente":{
-      "id":"1"
-    }
+    "precio": 75000.0
   },
   {
     "id": 2,
@@ -36,10 +33,7 @@
     "nroCuentaMunicipal": "001-001-002",
     "tieneLuz": false,
     "tieneAgua": true,
-    "precio": 80000.0,
-    "cliente":{
-      "id":"1"
-    }
+    "precio": 80000.0
   },
   {
     "id": 3,
@@ -59,7 +53,7 @@
     "tieneAgua": true,
     "precio": 72000.0,
     "cliente":{
-      "id":"1"
+      "id":1
     }
   },
   {
@@ -78,10 +72,7 @@
     "nroCuentaMunicipal": "001-001-004",
     "tieneLuz": true,
     "tieneAgua": false,
-    "precio": 85000.0,
-    "cliente":{
-      "id":"1"
-    }
+    "precio": 85000.0
   },
   {
     "id": 5,
@@ -101,7 +92,7 @@
     "tieneAgua": false,
     "precio": 90000.0,
     "cliente":{
-      "id":"1"
+      "id":1
     }
   },
   {
@@ -120,10 +111,7 @@
     "nroCuentaMunicipal": "001-001-006",
     "tieneLuz": true,
     "tieneAgua": true,
-    "precio": 95000.0,
-    "cliente":{
-      "id":"1"
-    }
+    "precio": 95000.0
   },
   {
     "id": 7,
@@ -141,10 +129,7 @@
     "nroCuentaMunicipal": "001-001-007",
     "tieneLuz": true,
     "tieneAgua": true,
-    "precio": 195000.0,
-    "cliente":{
-      "id":"1"
-    }
+    "precio": 195000.0
   },
   {
     "id": 8,
@@ -164,7 +149,7 @@
     "tieneAgua": true,
     "precio": 88000.0,
     "cliente":{
-      "id":"1"
+      "id":1
     }
   },
   {
@@ -183,10 +168,7 @@
     "nroCuentaMunicipal": "001-001-009",
     "tieneLuz": true,
     "tieneAgua": false,
-    "precio": 72000.0,
-    "cliente":{
-      "id":"1"
-    }
+    "precio": 72000.0
   },
   {
     "id": 10,
@@ -206,7 +188,7 @@
     "tieneAgua": true,
     "precio": 85000.0,
     "cliente":{
-      "id":"1"
+      "id":2
     }
   },
   {
@@ -225,10 +207,7 @@
     "nroCuentaMunicipal": "001-001-011",
     "tieneLuz": true,
     "tieneAgua": true,
-    "precio": 90000.0,
-    "cliente":{
-      "id":"1"
-    }
+    "precio": 90000.0
   },
   {
     "id": 12,
@@ -248,7 +227,7 @@
     "tieneAgua": false,
     "precio": 9000.0,
     "cliente":{
-      "id":"1"
+      "id":1
     }
   },
   {
@@ -269,7 +248,7 @@
     "tieneAgua": true,
     "precio": 93000.0,
     "cliente":{
-      "id":"1"
+      "id":3
     }
   },
   {
@@ -290,7 +269,7 @@
     "tieneAgua": false,
     "precio": 70000.0,
     "cliente":{
-      "id":"1"
+      "id":1
     }
   }
 ]

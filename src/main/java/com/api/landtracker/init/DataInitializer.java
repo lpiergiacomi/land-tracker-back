@@ -29,7 +29,7 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     private final LoteRepository loteRepository;
     private final ClienteRepository clienteRepository;
     private final ReservaRepository reservaRepository;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
@@ -41,8 +41,6 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     private <T> void cargarDesdeJson(String jsonFilePath, Class<?> clase,  JpaRepository<T, ?> repository) {
         try {
             ClassPathResource resource = new ClassPathResource(jsonFilePath);
-
-            System.out.println("Ruta del archivo JSON: " + resource.getURL().getPath());
 
             List<T> objetos = objectMapper.readValue(resource.getInputStream(),
                     objectMapper.getTypeFactory().constructCollectionType(List.class, clase));

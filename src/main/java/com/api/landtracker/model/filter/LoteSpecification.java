@@ -4,7 +4,7 @@ import com.api.landtracker.model.entities.EstadoLote;
 import com.api.landtracker.model.entities.Lote;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +21,24 @@ public class LoteSpecification {
                         builder.conjunction() :
                         builder.like(builder.lower(root.get("nombre")),
                                 "%" + name.toLowerCase() + "%"
+                        );
+    }
+
+    public static Specification<Lote> loteNroCuentaCatastralLike(String nroCuentaCatastral) {
+        return (root, query, builder) ->
+                nroCuentaCatastral == null || nroCuentaCatastral.equals("") ?
+                        builder.conjunction() :
+                        builder.like(builder.lower(root.get("nroCuentaCatastral")),
+                                "%" + nroCuentaCatastral.toLowerCase() + "%"
+                        );
+    }
+
+    public static Specification<Lote> loteNroCuentaMunicipalLike(String nroCuentaMunicipal) {
+        return (root, query, builder) ->
+                nroCuentaMunicipal == null || nroCuentaMunicipal.equals("") ?
+                        builder.conjunction() :
+                        builder.like(builder.lower(root.get("nroCuentaMunicipal")),
+                                "%" + nroCuentaMunicipal.toLowerCase() + "%"
                         );
     }
     public static Specification<Lote> precioEntreMinMax(Double precioMin, Double precioMax) {

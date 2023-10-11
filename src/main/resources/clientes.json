@@ -1,10 +1,82 @@
 [
   {
     "id": 1,
-    "nombre": "Nahuel Pereyra"
+    "nombre": "Diego Maradona",
+    "email": "diego.maradona@example.com",
+    "telefono": "123-456-7890",
+    "direccion": "Calle Principal, 123",
+    "documento": "32849630"
   },
   {
     "id": 2,
-    "nombre": "Lucas Piergiacomi"
+    "nombre": "Alfredo Di Stéfano",
+    "email": "alfredo.distefano@example.com",
+    "telefono": "987-654-3210",
+    "direccion": "Avenida Secundaria, 456",
+    "documento": "40581234"
+  },
+  {
+    "id": 3,
+    "nombre": "Gabriel Batistuta",
+    "email": "gabriel.batistuta@example.com",
+    "telefono": "555-555-5555",
+    "direccion": "Plaza Central, 789",
+    "documento": "27593645"
+  },
+  {
+    "id": 4,
+    "nombre": "Juan Román Riquelme",
+    "email": "juan.riquelme@example.com",
+    "telefono": "777-888-9999",
+    "direccion": "Calle Secundaria, 321",
+    "documento": "54321098"
+  },
+  {
+    "id": 5,
+    "nombre": "Lionel Messi",
+    "email": "lionel.messi@example.com",
+    "telefono": "555-123-7890",
+    "direccion": "Avenida Principal, 567",
+    "documento": "67891234"
+  },
+  {
+    "id": 6,
+    "nombre": "Daniel Passarella",
+    "email": "daniel.passarella@example.com",
+    "telefono": "111-222-3333",
+    "direccion": "Calle del Centro, 789",
+    "documento": "12345678"
+  },
+  {
+    "id": 7,
+    "nombre": "Mario Kempes",
+    "email": "mario.kempes@example.com",
+    "telefono": "444-555-6666",
+    "direccion": "Avenida Central, 987",
+    "documento": "98765432"
+  },
+  {
+    "id": 8,
+    "nombre": "Ariel Ortega",
+    "email": "ariel.ortega@example.com",
+    "telefono": "999-888-7777",
+    "direccion": "Plaza del Norte, 654",
+    "documento": "13579246"
+  },
+  {
+    "id": 9,
+    "nombre": "Diego Simeone",
+    "email": "diego.simeone@example.com",
+    "telefono": "333-222-1111",
+    "direccion": "Calle del Este, 852",
+    "documento": "98765432"
+  },
+  {
+    "id": 10,
+    "nombre": "Oscar Ruggeri",
+    "email": "oscar.ruggeri@example.com",
+    "telefono": "777-999-1111",
+    "direccion": "Avenida del Oeste, 753",
+    "documento": "54321678"
   }
 ]
