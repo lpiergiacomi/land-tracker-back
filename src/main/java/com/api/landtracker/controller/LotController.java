@@ -1,8 +1,8 @@
 package com.api.landtracker.controller;
 
-import com.api.landtracker.model.dto.LoteDTO;
-import com.api.landtracker.model.filter.LoteFilterParams;
-import com.api.landtracker.service.LoteService;
+import com.api.landtracker.model.dto.LotDTO;
+import com.api.landtracker.model.filter.LotFilterParams;
+import com.api.landtracker.service.LotService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,38 +21,37 @@ import java.util.List;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping("/lotes")
+@RequestMapping("/lots")
 @RequiredArgsConstructor
-public class LoteController {
+public class LotController {
 
-    private final LoteService loteService;
+    private final LotService lotService;
 
     @GetMapping("/{id}")
-    public LoteDTO obtenerLotePorId(@PathVariable Long id) {
-        LoteDTO lote = loteService.obtenerLotePorId(id);
-        return lote;
+    public LotDTO getLotById(@PathVariable Long id) {
+        return lotService.getLotById(id);
     }
 
     @GetMapping
-    public List<LoteDTO> obtenerTodosLosLotes() {
-        return loteService.obtenerTodosLosLotes();
+    public List<LotDTO> getAllLots() {
+        return lotService.getAllLots();
     }
     @PostMapping
-    public LoteDTO guardarLote(@RequestBody LoteDTO lote) {
-        return loteService.guardarLote(lote);
+    public LotDTO saveLot(@RequestBody LotDTO lot) {
+        return lotService.saveLot(lot);
     }
 
     @PostMapping("/filter")
-    public ResponseEntity<Page<LoteDTO>> pages(
+    public ResponseEntity<Page<LotDTO>> pages(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "200") int size,
-            @RequestParam(defaultValue = "nombre") String order,
+            @RequestParam(defaultValue = "name") String order,
             @RequestParam(defaultValue = "true") boolean asc,
-            @RequestBody LoteFilterParams loteParams) {
+            @RequestBody LotFilterParams lotParams) {
 
-        Page<LoteDTO> lotes = loteService.obtenerLotesConFiltro(loteParams,
+        Page<LotDTO> lots = lotService.getAllLotsWithFilter(lotParams,
                 PageRequest.of(page, size, Sort.by(order)));
-        return ok(lotes);
+        return ok(lots);
     }
 
 }

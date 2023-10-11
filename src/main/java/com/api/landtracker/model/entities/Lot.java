@@ -23,52 +23,52 @@ import jakarta.persistence.Table;
 @Setter
 @Entity
 @Builder
-@Table(name = "lote")
+@Table(name = "lot")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Lote {
+public class Lot {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "superficie")
-    private Integer superficie;
+    @Column(name = "area")
+    private Integer area;
 
-    @Column(name = "estado_lote")
+    @Column(name = "state")
     @Enumerated(EnumType.STRING)
-    private EstadoLote estadoLote;
+    private LotState state;
 
     @Embedded
-    private PosicionLote posicionLote;
+    private LotPosition position;
 
-    @Column(name = "metrosFrente")
-    private Double metrosFrente;
+    @Column(name = "metersFront")
+    private Double metersFront;
 
-    @Column(name = "metrosFondo")
-    private Double metrosFondo;
+    @Column(name = "metersBack")
+    private Double metersBack;
 
-    @Column(name = "nroCuentaCatastral")
-    private String nroCuentaCatastral;
+    @Column(name = "cadastralAccNumber")
+    private String cadastralAccNumber;
 
-    @Column(name = "nroCuentaMunicipal")
-    private String nroCuentaMunicipal;
+    @Column(name = "municipalAccNumber")
+    private String municipalAccNumber;
 
-    @Column(name = "tieneLuz")
-    private Boolean tieneLuz;
+    @Column(name = "hasLight")
+    private Boolean hasLight;
 
-    @Column(name = "tieneAgua")
-    private Boolean tieneAgua;
+    @Column(name = "hasWater")
+    private Boolean hasWater;
 
-    @Column(name = "precio")
-    private Double precio;
+    @Column(name = "price")
+    private Double price;
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente")
-    private Cliente cliente;
+    @JoinColumn(name = "client")
+    private Client client;
 
 }

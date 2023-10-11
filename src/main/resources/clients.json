@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Diego Maradona",
+    "email": "diego.maradona@example.com",
+    "phone": "123-456-7890",
+    "address": "Calle Principal, 123",
+    "document": "32849630"
+  },
+  {
+    "id": 2,
+    "name": "Alfredo Di Stéfano",
+    "email": "alfredo.distefano@example.com",
+    "phone": "987-654-3210",
+    "address": "Avenida Secundaria, 456",
+    "document": "40581234"
+  },
+  {
+    "id": 3,
+    "name": "Gabriel Batistuta",
+    "email": "gabriel.batistuta@example.com",
+    "phone": "555-555-5555",
+    "address": "Plaza Central, 789",
+    "document": "27593645"
+  },
+  {
+    "id": 4,
+    "name": "Juan Román Riquelme",
+    "email": "juan.riquelme@example.com",
+    "phone": "777-888-9999",
+    "address": "Calle Secundaria, 321",
+    "document": "54321098"
+  },
+  {
+    "id": 5,
+    "name": "Lionel Messi",
+    "email": "lionel.messi@example.com",
+    "phone": "555-123-7890",
+    "address": "Avenida Principal, 567",
+    "document": "67891234"
+  },
+  {
+    "id": 6,
+    "name": "Daniel Passarella",
+    "email": "daniel.passarella@example.com",
+    "phone": "111-222-3333",
+    "address": "Calle del Centro, 789",
+    "document": "12345678"
+  },
+  {
+    "id": 7,
+    "name": "Mario Kempes",
+    "email": "mario.kempes@example.com",
+    "phone": "444-555-6666",
+    "address": "Avenida Central, 987",
+    "document": "98765432"
+  },
+  {
+    "id": 8,
+    "name": "Ariel Ortega",
+    "email": "ariel.ortega@example.com",
+    "phone": "999-888-7777",
+    "address": "Plaza del Norte, 654",
+    "document": "13579246"
+  },
+  {
+    "id": 9,
+    "name": "Diego Simeone",
+    "email": "diego.simeone@example.com",
+    "phone": "333-222-1111",
+    "address": "Calle del Este, 852",
+    "document": "98765432"
+  },
+  {
+    "id": 10,
+    "name": "Oscar Ruggeri",
+    "email": "oscar.ruggeri@example.com",
+    "phone": "777-999-1111",
+    "address": "Avenida del Oeste, 753",
+    "document": "54321678"
+  }
+]

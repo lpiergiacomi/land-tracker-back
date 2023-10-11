@@ -1,6 +1,6 @@
 package com.api.landtracker.model.entities;
 
-public enum EstadoLote {
+public enum LotState {
 
     DISPONIBLE,
     RESERVADO,

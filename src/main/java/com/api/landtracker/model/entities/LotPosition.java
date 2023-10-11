@@ -13,7 +13,7 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
-public class PosicionLote {
+public class LotPosition {
 
     @Column(name = "x")
     private Double x;
