@@ -48,8 +48,18 @@ public class ReserveServiceTest {
         Reserve reserve1 = Reserve.builder().id(1L).client(client1).lot(lot1).build();
         Reserve reserve2 = Reserve.builder().id(2L).client(client2).lot(lot2).build();
 
-        ReserveDTO reserveDTO1 = ReserveDTO.builder().id(1L).clientId(client1.getId()).lotId(lot1.getId()).build();
-        ReserveDTO reserveDTO2 = ReserveDTO.builder().id(2L).clientId(client2.getId()).lotId(lot2.getId()).build();
+        ReserveDTO reserveDTO1 = ReserveDTO.builder().id(1L)
+                .clientId(client1.getId())
+                .clientName(client1.getName())
+                .lotId(lot1.getId())
+                .lotName(lot1.getName())
+                .build();
+        ReserveDTO reserveDTO2 = ReserveDTO.builder().id(2L)
+                .clientId(client2.getId())
+                .clientName(client2.getName())
+                .lotId(lot2.getId())
+                .lotName(lot2.getName())
+                .build();
 
         List<Reserve> reserves = Arrays.asList(reserve1, reserve2);
         List<ReserveDTO> reservesDTO = Arrays.asList(reserveDTO1, reserveDTO2);

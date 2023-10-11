@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,5 +26,9 @@ public class LotDTO {
     private Boolean hasLight;
     private Boolean hasWater;
     private Double price;
+    private String block;
+    private String zone;
+    private List<UserDTO> assignedUsers;
+
 
 }

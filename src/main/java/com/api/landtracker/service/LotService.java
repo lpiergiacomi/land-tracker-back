@@ -36,6 +36,7 @@ public class LotService {
         return lotResponse;
     }
 
+    @Transactional(dontRollbackOn = Exception.class)
     public LotDTO getLotById(Long id) {
         Lot lot = lotRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("No se encontró un lote con ese id"));
