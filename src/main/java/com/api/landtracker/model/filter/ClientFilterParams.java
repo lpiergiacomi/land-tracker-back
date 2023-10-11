@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ClienteFilterParams {
-    private String nombre;
+public class ClientFilterParams {
+    private String name;
 }

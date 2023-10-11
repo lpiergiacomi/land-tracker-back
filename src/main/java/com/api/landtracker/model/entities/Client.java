@@ -17,28 +17,28 @@ import jakarta.persistence.Table;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "cliente")
+@Table(name = "client")
 @Entity
 @Builder
-public class Cliente {
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "telefono")
-    private String telefono;
+    @Column(name = "phone")
+    private String phone;
 
-    @Column(name = "direccion")
-    private String direccion;
+    @Column(name = "address")
+    private String address;
 
-    @Column(name = "documento")
-    private String documento;
+    @Column(name = "document")
+    private String document;
 }

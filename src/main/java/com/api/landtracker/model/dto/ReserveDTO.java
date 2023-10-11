@@ -11,13 +11,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ReservaDTO {
+public class ReserveDTO {
 
     private Long id;
-    private Long idCliente;
-    private Long idLote;
-    private String nombreLote;
-    private String nombreCliente;
-    private String numero;
-    private LocalDate fechaVencimiento;
+    private Long clientId;
+    private Long lotId;
+    private String lotName;
+    private String clientName;
+    private String number;
+    private LocalDate dueDate;
 }

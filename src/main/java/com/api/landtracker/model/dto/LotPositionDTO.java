@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PosicionLoteDTO {
+public class LotPositionDTO {
 
     private Double x;
     private Double y;

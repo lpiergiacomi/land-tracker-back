@@ -23,10 +23,10 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Builder
-@Table(name = "reserva")
+@Table(name = "reserve")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reserva implements Serializable {
+public class Reserve implements Serializable {
 
     private static final long serialVersionUID = 2349767485857869704L;
 
@@ -36,20 +36,20 @@ public class Reserva implements Serializable {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente", nullable = false)
-    private Cliente cliente;
+    @JoinColumn(name = "client", nullable = false)
+    private Client client;
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "lote", nullable = false)
-    private Lote lote;
+    @JoinColumn(name = "lot", nullable = false)
+    private Lot lot;
 
-    @Column(name = "numero", unique = true)
-    private String numero;
+    @Column(name = "number", unique = true)
+    private String number;
 
-    @Column(name = "fecha_vencimiento")
-    private LocalDate fechaVencimiento;
+    @Column(name = "due_date")
+    private LocalDate dueDate;
 
-    @Column(name = "fecha_creacion")
-    private LocalDate fechaCreacion;
+    @Column(name = "creation_date")
+    private LocalDate creationDate;
 
 }

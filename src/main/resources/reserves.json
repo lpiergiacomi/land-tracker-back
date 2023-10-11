@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "client": {
+      "id": 1
+    },
+    "lot": {
+      "id": 3
+    },
+    "number": "00000001",
+    "dueDate": "2023-12-31",
+    "creationDate": "2023-09-25"
+  },
+  {
+    "id": 2,
+    "client": {
+      "id": 2
+    },
+    "lot": {
+      "id": 10
+    },
+    "number": "00000002",
+    "dueDate": "2023-11-30",
+    "creationDate": "2023-09-25"
+  },
+  {
+    "id": 3,
+    "client": {
+      "id": 3
+    },
+    "lot": {
+      "id": 13
+    },
+    "number": "00000003",
+    "dueDate": "2023-10-31",
+    "creationDate": "2023-09-25"
+  }
+]

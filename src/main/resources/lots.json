@@ -1,0 +1,275 @@
+[
+  {
+    "id": 1,
+    "name": "Lote 1",
+    "area": 500,
+    "state": "DISPONIBLE",
+    "position": {
+      "x": -128.0,
+      "y": 5.0,
+      "z": -75.0
+    },
+    "metersFront": 20.0,
+    "metersBack": 25.0,
+    "cadastralAccNumber": "001-001-001",
+    "municipalAccNumber": "001-001-001",
+    "hasLight": true,
+    "hasWater": true,
+    "price": 75000.0
+  },
+  {
+    "id": 2,
+    "name": "Lote 2",
+    "area": 600,
+    "state": "DISPONIBLE",
+    "position": {
+      "x": -90.0,
+      "y": 5.0,
+      "z": -75.0
+    },
+    "metersFront": 22.0,
+    "metersBack": 27.0,
+    "cadastralAccNumber": "001-001-002",
+    "municipalAccNumber": "001-001-002",
+    "hasLight": false,
+    "hasWater": true,
+    "price": 80000.0
+  },
+  {
+    "id": 3,
+    "name": "Lote 3",
+    "area": 550,
+    "state": "RESERVADO",
+    "position": {
+      "x": -50.0,
+      "y": 5.0,
+      "z": -75.0
+    },
+    "metersFront": 18.0,
+    "metersBack": 30.0,
+    "cadastralAccNumber": "001-001-003",
+    "municipalAccNumber": "001-001-003",
+    "hasLight": true,
+    "hasWater": true,
+    "price": 72000.0,
+    "client":{
+      "id":1
+    }
+  },
+  {
+    "id": 4,
+    "name": "Lote 4",
+    "area": 700,
+    "state": "DISPONIBLE",
+    "position": {
+      "x": -15.0,
+      "y": 5.0,
+      "z": -75.0
+    },
+    "metersFront": 25.0,
+    "metersBack": 28.0,
+    "cadastralAccNumber": "001-001-004",
+    "municipalAccNumber": "001-001-004",
+    "hasLight": true,
+    "hasWater": false,
+    "price": 85000.0
+  },
+  {
+    "id": 5,
+    "name": "Lote 5",
+    "area": 450,
+    "state": "VENDIDO",
+    "position": {
+      "x": 60.0,
+      "y": 5.0,
+      "z": -75.0
+    },
+    "metersFront": 15.0,
+    "metersBack": 30.0,
+    "cadastralAccNumber": "001-001-005",
+    "municipalAccNumber": "001-001-005",
+    "hasLight": false,
+    "hasWater": false,
+    "price": 90000.0,
+    "client":{
+      "id":1
+    }
+  },
+  {
+    "id": 6,
+    "name": "Lote 6",
+    "area": 800,
+    "state": "DISPONIBLE",
+    "position": {
+      "x": 100.0,
+      "y": 5.0,
+      "z": -75.0
+    },
+    "metersFront": 30.0,
+    "metersBack": 27.0,
+    "cadastralAccNumber": "001-001-006",
+    "municipalAccNumber": "001-001-006",
+    "hasLight": true,
+    "hasWater": true,
+    "price": 95000.0
+  },
+  {
+    "id": 7,
+    "name": "Lote 7",
+    "area": 1300,
+    "state": "DISPONIBLE",
+    "position": {
+      "x": 135.0,
+      "y": 5.0,
+      "z": -75.0
+    },
+    "metersFront": 41.0,
+    "metersBack": 36.0,
+    "cadastralAccNumber": "001-001-007",
+    "municipalAccNumber": "001-001-007",
+    "hasLight": true,
+    "hasWater": true,
+    "price": 195000.0
+  },
+  {
+    "id": 8,
+    "name": "Lote 8",
+    "area": 600,
+    "state": "VENDIDO",
+    "position": {
+      "x": -128.0,
+      "y": 5.0,
+      "z": 50
+    },
+    "metersFront": 20.0,
+    "metersBack": 30.0,
+    "cadastralAccNumber": "001-001-008",
+    "municipalAccNumber": "001-001-008",
+    "hasLight": true,
+    "hasWater": true,
+    "price": 88000.0,
+    "client":{
+      "id":1
+    }
+  },
+  {
+    "id": 9,
+    "name": "Lote 9",
+    "area": 550,
+    "state": "DISPONIBLE",
+    "position": {
+      "x": -90.0,
+      "y": 5.0,
+      "z": 50
+    },
+    "metersFront": 18.0,
+    "metersBack": 30.0,
+    "cadastralAccNumber": "001-001-009",
+    "municipalAccNumber": "001-001-009",
+    "hasLight": true,
+    "hasWater": false,
+    "price": 72000.0
+  },
+  {
+    "id": 10,
+    "name": "Lote 10",
+    "area": 700,
+    "state": "RESERVADO",
+    "position": {
+      "x": -50.0,
+      "y": 5.0,
+      "z": 50
+    },
+    "metersFront": 25.0,
+    "metersBack": 28.0,
+    "cadastralAccNumber": "001-001-010",
+    "municipalAccNumber": "001-001-010",
+    "hasLight": false,
+    "hasWater": true,
+    "price": 85000.0,
+    "client":{
+      "id":2
+    }
+  },
+  {
+    "id": 11,
+    "name": "Lote 11",
+    "area": 450,
+    "state": "DISPONIBLE",
+    "position": {
+      "x": -15.0,
+      "y": 5.0,
+      "z": 50
+    },
+    "metersFront": 15.0,
+    "metersBack": 25.0,
+    "cadastralAccNumber": "001-001-011",
+    "municipalAccNumber": "001-001-011",
+    "hasLight": true,
+    "hasWater": true,
+    "price": 90000.0
+  },
+  {
+    "id": 12,
+    "name": "Lote 12",
+    "area": 180,
+    "state": "VENDIDO",
+    "position": {
+      "x": 60.0,
+      "y": 5.0,
+      "z": 50
+    },
+    "metersFront": 15.0,
+    "metersBack": 10.0,
+    "cadastralAccNumber": "001-001-012",
+    "municipalAccNumber": "001-001-012",
+    "hasLight": false,
+    "hasWater": false,
+    "price": 9000.0,
+    "client":{
+      "id":1
+    }
+  },
+  {
+    "id": 13,
+    "name": "Lote 13",
+    "area": 315,
+    "state": "RESERVADO",
+    "position": {
+      "x": 100.0,
+      "y": 5.0,
+      "z": 50
+    },
+    "metersFront": 15.0,
+    "metersBack": 25.0,
+    "cadastralAccNumber": "001-001-013",
+    "municipalAccNumber": "001-001-013",
+    "hasLight": true,
+    "hasWater": true,
+    "price": 93000.0,
+    "client":{
+      "id":3
+    }
+  },
+  {
+    "id": 14,
+    "name": "Lote 14",
+    "area": 259,
+    "state": "VENDIDO",
+    "position": {
+      "x": 135.0,
+      "y": 5.0,
+      "z": 50
+    },
+    "metersFront": 18.0,
+    "metersBack": 18.0,
+    "cadastralAccNumber": "001-001-014",
+    "municipalAccNumber": "001-001-014",
+    "hasLight": true,
+    "hasWater": false,
+    "price": 70000.0,
+    "client":{
+      "id":1
+    }
+  }
+]
