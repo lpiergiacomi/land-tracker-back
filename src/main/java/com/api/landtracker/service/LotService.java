@@ -24,6 +24,7 @@ public class LotService {
     private final LotRepository lotRepository;
     private final LotMapper lotMapper;
 
+    @Transactional(dontRollbackOn = Exception.class)
     public List<LotDTO> getAllLots() {
         List<Lot> lots = (List<Lot>) lotRepository.findAll();
         List<LotDTO> lotsDTO = lotMapper.lotsToLotsDTO(lots);
@@ -50,11 +51,14 @@ public class LotService {
         Specification<Lot> nameLike = LotSpecification.lotNameLike(params.getName());
         Specification<Lot> municipalAccNumberLike = LotSpecification.lotMunicipalAccNumberLike(params.getName());
         Specification<Lot> cadastralAccNumberLike = LotSpecification.lotCadastralAccNumberLike(params.getName());
+        Specification<Lot> blockLike = LotSpecification.lotBlockLike(params.getName());
+        Specification<Lot> zoneLike = LotSpecification.lotZoneLike(params.getName());
+
         Specification<Lot> priceBetweenMinMax = LotSpecification.priceBetweenMinMax(params.getMinPrice(), params.getMaxPrice());
 
         Page<Lot> lotPage = this.lotRepository.findAll(
                 Specification.where(statesEquals)
-                .and(nameLike.or(municipalAccNumberLike).or(cadastralAccNumberLike))
+                .and(nameLike.or(municipalAccNumberLike).or(cadastralAccNumberLike).or(blockLike).or(zoneLike))
                 .and(priceBetweenMinMax),
                 pageable);
 

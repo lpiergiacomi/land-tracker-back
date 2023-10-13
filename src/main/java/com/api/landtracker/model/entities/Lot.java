@@ -43,14 +43,12 @@ public class Lot {
 
     @Column(name = "area")
     private Integer area;
+
     @Column(name = "block")
     private String block;
 
     @Column(name = "zone")
     private String zone;
-
-    @Column(name = "superficie")
-    private Integer superficie;
 
     @Column(name = "state")
     @Enumerated(EnumType.STRING)

@@ -41,6 +41,25 @@ public class LotSpecification {
                                 "%" + municipalAccNumber.toLowerCase() + "%"
                         );
     }
+
+    public static Specification<Lot> lotBlockLike(String block) {
+        return (root, query, builder) ->
+                block == null || block.equals("") ?
+                        builder.conjunction() :
+                        builder.like(builder.lower(root.get("block")),
+                                "%" + block.toLowerCase() + "%"
+                        );
+    }
+
+    public static Specification<Lot> lotZoneLike(String zone) {
+        return (root, query, builder) ->
+                zone == null || zone.equals("") ?
+                        builder.conjunction() :
+                        builder.like(builder.lower(root.get("zone")),
+                                "%" + zone.toLowerCase() + "%"
+                        );
+    }
+
     public static Specification<Lot> priceBetweenMinMax(Double minPrice, Double maxPrice) {
         return (root, query, builder) -> {
 
