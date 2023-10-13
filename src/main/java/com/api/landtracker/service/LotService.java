@@ -1,7 +1,9 @@
 package com.api.landtracker.service;
 
 import com.api.landtracker.model.dto.LotDTO;
+import com.api.landtracker.model.dto.UserWithAssignedLotsDTO;
 import com.api.landtracker.model.entities.Lot;
+import com.api.landtracker.model.entities.User;
 import com.api.landtracker.model.filter.LotFilterParams;
 import com.api.landtracker.model.filter.LotSpecification;
 import com.api.landtracker.model.mappers.LotMapper;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +48,7 @@ public class LotService {
         return lotDTO;
     }
 
+    @Transactional(dontRollbackOn = Exception.class)
     public Page<LotDTO> getAllLotsWithFilter(LotFilterParams params, Pageable pageable) {
 
         Specification<Lot> statesEquals = LotSpecification.stateEqualsIn(params.getStates());
@@ -67,5 +71,21 @@ public class LotService {
         result.addAll(lotMapper.lotsToLotsDTO(lotPage.getContent()));
 
         return new PageImpl<LotDTO>(result, pageable, lotPage.getTotalElements());
+    }
+
+    @Transactional
+    public UserWithAssignedLotsDTO updateAssignedLotsToUser(UserWithAssignedLotsDTO user) {
+        User userToAssign = new User();
+        userToAssign.setId(user.getId());
+        List<Lot> lotsToAssign = lotRepository.findAllById(user.getAssignedLotsIds());
+        List<Lot> lotsToSave = new ArrayList<>();
+        lotsToAssign.forEach(lot -> {
+            if (!lot.getAssignedUsers().stream().map(User::getId).toList().contains(user.getId())){
+                lot.getAssignedUsers().add(userToAssign);
+                lotsToSave.add(lot);
+            }
+        });
+        lotRepository.saveAll(lotsToSave);
+        return user;
     }
 }

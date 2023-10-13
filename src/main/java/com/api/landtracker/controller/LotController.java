@@ -1,6 +1,7 @@
 package com.api.landtracker.controller;
 
 import com.api.landtracker.model.dto.LotDTO;
+import com.api.landtracker.model.dto.UserWithAssignedLotsDTO;
 import com.api.landtracker.model.filter.LotFilterParams;
 import com.api.landtracker.service.LotService;
 import lombok.RequiredArgsConstructor;
@@ -52,6 +53,11 @@ public class LotController {
         Page<LotDTO> lots = lotService.getAllLotsWithFilter(lotParams,
                 PageRequest.of(page, size, Sort.by(order)));
         return ok(lots);
+    }
+
+    @PostMapping("/update-assigned-lots-to-user")
+    public UserWithAssignedLotsDTO updateAssignedLotsToUser(@RequestBody UserWithAssignedLotsDTO user) {
+        return lotService.updateAssignedLotsToUser(user);
     }
 
 }
