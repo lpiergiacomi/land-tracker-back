@@ -15,7 +15,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
             " FROM User user " +
             " LEFT JOIN lot_assigment lot_assignment on lot_assignment.user_id = user.id " +
             " LEFT JOIN lot lot on lot.id = lot_assignment.lote_id " +
-            " WHERE lot.state = 'DISPONIBLE' " +
             " GROUP BY user.id ",
             nativeQuery = true)
     List<IUserWithAssignedLots> getAllUsersWithAssignedLots();
