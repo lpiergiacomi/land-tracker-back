@@ -82,13 +82,4 @@ public class Lot {
     @JoinColumn(name = "client")
     private Client client;
 
-    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "lot_assigment",
-            joinColumns = { @JoinColumn(name = "lote_id") },
-            inverseJoinColumns = { @JoinColumn(name = "user_id") }
-    )
-    private List<User> assignedUsers = new ArrayList<>();
-
-
 }

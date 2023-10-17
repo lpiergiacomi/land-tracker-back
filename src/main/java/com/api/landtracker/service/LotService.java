@@ -8,14 +8,18 @@ import com.api.landtracker.model.filter.LotFilterParams;
 import com.api.landtracker.model.filter.LotSpecification;
 import com.api.landtracker.model.mappers.LotMapper;
 import com.api.landtracker.repository.LotRepository;
+import com.api.landtracker.repository.UserRepository;
+import com.api.landtracker.utils.exception.DataValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +29,7 @@ import java.util.stream.Collectors;
 public class LotService {
 
     private final LotRepository lotRepository;
+    private final UserRepository userRepository;
     private final LotMapper lotMapper;
 
     @Transactional(dontRollbackOn = Exception.class)
@@ -33,6 +38,7 @@ public class LotService {
         List<LotDTO> lotsDTO = lotMapper.lotsToLotsDTO(lots);
         return lotsDTO;
     }
+
     @Transactional
     public LotDTO saveLot(LotDTO lotDTO) {
         Lot lot = lotMapper.lotDTOToLot(lotDTO);
@@ -74,18 +80,21 @@ public class LotService {
     }
 
     @Transactional
-    public UserWithAssignedLotsDTO updateAssignedLotsToUser(UserWithAssignedLotsDTO user) {
-        User userToAssign = new User();
-        userToAssign.setId(user.getId());
-        List<Lot> lotsToAssign = lotRepository.findAllById(user.getAssignedLotsIds());
-        List<Lot> lotsToSave = new ArrayList<>();
-        lotsToAssign.forEach(lot -> {
-            if (!lot.getAssignedUsers().stream().map(User::getId).toList().contains(user.getId())){
-                lot.getAssignedUsers().add(userToAssign);
-                lotsToSave.add(lot);
-            }
-        });
-        lotRepository.saveAll(lotsToSave);
+    public UserWithAssignedLotsDTO updateAssignedLotsToUser(UserWithAssignedLotsDTO user) throws DataValidationException {
+        lotRepository.deleteAssignedLotsByUserId(user.getId(), user.getAssignedLotsIds());
+        User userToSave = userRepository.findById(user.getId()).orElseThrow(() -> new DataValidationException("Usuario inexistente"));
+
+        List<Long> assignedLots = userToSave.getAssignedLots().stream().map(Lot::getId).toList();
+
+        user.getAssignedLotsIds().stream()
+                .filter(lotId -> !assignedLots.contains(lotId))
+                .forEach(lotId -> {
+                    Lot lotToAdd = new Lot();
+                    lotToAdd.setId(lotId);
+                    userToSave.getAssignedLots().add(lotToAdd);
+                });
+        userRepository.save(userToSave);
+
         return user;
     }
 }
