@@ -81,7 +81,7 @@ public class LotService {
 
     @Transactional
     public UserWithAssignedLotsDTO updateAssignedLotsToUser(UserWithAssignedLotsDTO user) throws DataValidationException {
-        lotRepository.deleteAssignedLotsByUserId(user.getId(), user.getAssignedLotsIds());
+        lotRepository.deleteAssignedLotsByUserId(user.getId(), user.getAssignedLotsIds(), user.getAssignedLotsIds().size() == 0);
         User userToSave = userRepository.findById(user.getId()).orElseThrow(() -> new DataValidationException("Usuario inexistente"));
 
         List<Long> assignedLots = userToSave.getAssignedLots().stream().map(Lot::getId).toList();

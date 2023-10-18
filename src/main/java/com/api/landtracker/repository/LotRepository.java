@@ -16,6 +16,6 @@ public interface LotRepository extends JpaRepository<Lot, Long>, JpaSpecificatio
 
     @Modifying()
     @Query(value = "DELETE FROM lot_assignment " +
-            "WHERE user_id = :userId AND (:lotIds is null OR lot_id NOT IN (:lotIds))", nativeQuery = true)
-    void deleteAssignedLotsByUserId(Long userId, List<Long> lotIds);
+            "WHERE user_id = :userId AND (:hasLots OR lot_id NOT IN (:lotIds))", nativeQuery = true)
+    void deleteAssignedLotsByUserId(Long userId, List<Long> lotIds, boolean hasLots);
 }
