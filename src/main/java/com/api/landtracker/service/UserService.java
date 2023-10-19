@@ -1,17 +1,15 @@
 package com.api.landtracker.service;
 
-import com.api.landtracker.model.dto.UserRegisterDTO;
 import com.api.landtracker.model.dto.IUserWithAssignedLots;
+import com.api.landtracker.model.dto.UserRegisterDTO;
 import com.api.landtracker.model.dto.UserWithAssignedLotsDTO;
 import com.api.landtracker.model.entities.User;
-import com.api.landtracker.model.mappers.UserMapper;
 import com.api.landtracker.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import jakarta.transaction.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +23,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final UserMapper userMapper;
 
     @Transactional
     public void register(UserRegisterDTO userRegisterationDto) throws DataIntegrityViolationException {
@@ -44,22 +41,31 @@ public class UserService {
     }
 
     public List<UserWithAssignedLotsDTO> getAllUsersWithAssignedLots() {
-        List<IUserWithAssignedLots> usersWithAssignedLots = userRepository.getAllUsersWithAssignedLots();
+        List<IUserWithAssignedLots> usersWithAssignedLots = userRepository.getUserOrUsersWithAssignedLots(null);
         List<UserWithAssignedLotsDTO> usersWithAssignedLotsImpl = new ArrayList<>();
 
         usersWithAssignedLots.forEach(user -> {
-            UserWithAssignedLotsDTO userToAdd = new UserWithAssignedLotsDTO();
-            userToAdd.setId(user.getId());
-            userToAdd.setUsername(user.getUsername());
-            if (user.getAssignedLotsIdsString() != null) {
-                List<Long> lotsIds = Arrays.stream(user.getAssignedLotsIdsString()
-                                            .split(", ")).toList()
-                                            .stream().map(Long::parseLong)
-                                            .collect(Collectors.toList());
-                userToAdd.setAssignedLotsIds(lotsIds);
-            }
-            usersWithAssignedLotsImpl.add(userToAdd);
+            usersWithAssignedLotsImpl.add(getUserWithAssignedLotsDTO(user));
         });
         return usersWithAssignedLotsImpl;
+    }
+
+    private UserWithAssignedLotsDTO getUserWithAssignedLotsDTO(IUserWithAssignedLots user) {
+        UserWithAssignedLotsDTO userToAdd = new UserWithAssignedLotsDTO();
+        userToAdd.setId(user.getId());
+        userToAdd.setUsername(user.getUsername());
+        if (user.getAssignedLotsIdsString() != null) {
+            List<Long> lotsIds = Arrays.stream(user.getAssignedLotsIdsString()
+                                        .split(", ")).toList()
+                                        .stream().map(Long::parseLong)
+                                        .collect(Collectors.toList());
+            userToAdd.setAssignedLotsIds(lotsIds);
+        }
+        return userToAdd;
+    }
+
+    public UserWithAssignedLotsDTO getUserById(Long id) {
+        List<IUserWithAssignedLots> usersWithAssignedLots = userRepository.getUserOrUsersWithAssignedLots(id);
+        return getUserWithAssignedLotsDTO(usersWithAssignedLots.get(0));
     }
 }

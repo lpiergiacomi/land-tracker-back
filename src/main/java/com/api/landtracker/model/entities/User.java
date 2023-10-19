@@ -1,6 +1,7 @@
 package com.api.landtracker.model.entities;
 
 import jakarta.persistence.FetchType;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@Table(name = "user")
 @Getter
 @Setter
 public class User {

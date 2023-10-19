@@ -13,9 +13,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT user.id, user.username, GROUP_CONCAT(lot.id SEPARATOR ', ') as assignedLotsIdsString " +
             " FROM User user " +
-            " LEFT JOIN lot_assignment lot_assignment on lot_assignment.user_id = user.id " +
-            " LEFT JOIN lot lot on lot.id = lot_assignment.lot_id " +
+            " LEFT JOIN lot_assignment on lot_assignment.user_id = user.id " +
+            " LEFT JOIN lot on lot.id = lot_assignment.lot_id " +
+            " WHERE user.id = :userId or :userId is null " +
             " GROUP BY user.id ",
             nativeQuery = true)
-    List<IUserWithAssignedLots> getAllUsersWithAssignedLots();
+    List<IUserWithAssignedLots> getUserOrUsersWithAssignedLots(Long userId);
 }
