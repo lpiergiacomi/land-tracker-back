@@ -1,9 +1,9 @@
 package com.api.landtracker.config.security;
 
+import com.api.landtracker.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
 
 @Configuration
@@ -28,6 +27,7 @@ public class SecurityConfig {
     private final JwtTokenFilter jwtTokenFilter;
 
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final UserRepository userRepository;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -37,7 +37,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
         final UserAuthenticationFilter userAuthenticationFilter =
-                new UserAuthenticationFilter(jwtUtil, daoAuthenticationProvider());
+                new UserAuthenticationFilter(jwtUtil, daoAuthenticationProvider(), userRepository);
         userAuthenticationFilter.setFilterProcessesUrl("/auth/login");
 
         http.cors(Customizer.withDefaults())
