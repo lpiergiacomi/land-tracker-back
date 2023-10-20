@@ -43,13 +43,13 @@ public class Reserve implements Serializable {
     @JoinColumn(name = "lot", nullable = false)
     private Lot lot;
 
-    @Column(name = "number", unique = true)
-    private String number;
-
     @Column(name = "due_date")
     private LocalDate dueDate;
 
     @Column(name = "creation_date")
     private LocalDate creationDate;
 
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user")
+    private User user;
 }

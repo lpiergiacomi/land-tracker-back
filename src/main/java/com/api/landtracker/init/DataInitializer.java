@@ -35,8 +35,8 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     public void onApplicationEvent(ApplicationReadyEvent event) {
         cargarDesdeJson("clients.json", Client.class, clientRepository);
         cargarDesdeJson("lots.json", Lot.class, lotRepository);
-        cargarDesdeJson("reserves.json", Reserve.class, reserveRepository);
         cargarDesdeJson("users.json", User.class, userRepository);
+        cargarDesdeJson("reserves.json", Reserve.class, reserveRepository);
     }
 
     private <T> void cargarDesdeJson(String jsonFilePath, Class<?> clase,  JpaRepository<T, ?> repository) {

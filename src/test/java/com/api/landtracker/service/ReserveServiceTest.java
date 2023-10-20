@@ -8,6 +8,7 @@ import com.api.landtracker.model.mappers.ReserveMapper;
 import com.api.landtracker.model.mappers.ReserveMapperImpl;
 import com.api.landtracker.repository.LotRepository;
 import com.api.landtracker.repository.ReserveRepository;
+import com.api.landtracker.utils.exception.DataValidationException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -72,7 +73,7 @@ public class ReserveServiceTest {
     }
 
     @Test
-    public void testSaveReserve() {
+    public void testSaveReserve() throws DataValidationException {
         Client client = Client.builder().id(1L).name("Cliente 1").build();
         Lot lot = Lot.builder().id(1L).name("Lote 1").build();
 

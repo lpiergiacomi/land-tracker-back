@@ -2,6 +2,7 @@ package com.api.landtracker.controller;
 
 import com.api.landtracker.model.dto.ReserveDTO;
 import com.api.landtracker.service.ReserveService;
+import com.api.landtracker.utils.exception.DataValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,7 @@ public class ReserveController {
     }
 
     @PostMapping
-    public ReserveDTO saveReserve(@RequestBody ReserveDTO reserve) {
+    public ReserveDTO saveReserve(@RequestBody ReserveDTO reserve) throws DataValidationException {
         return reserveService.saveReserve(reserve);
     }
 }
