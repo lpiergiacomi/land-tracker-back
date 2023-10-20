@@ -1,5 +1,6 @@
 package com.api.landtracker.model.dto;
 
+import com.api.landtracker.model.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,6 @@ public class ReserveDTO {
     private Long lotId;
     private String lotName;
     private String clientName;
-    private String number;
     private LocalDate dueDate;
+    private User user;
 }

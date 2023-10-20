@@ -3,6 +3,8 @@
     "id": 1,
     "name": "Lote 1",
     "area": 500,
+    "block": "1",
+    "zone": "1",
     "state": "DISPONIBLE",
     "position": {
       "x": -128.0,
@@ -21,6 +23,8 @@
     "id": 2,
     "name": "Lote 2",
     "area": 600,
+    "block": "1",
+    "zone": "1",
     "state": "DISPONIBLE",
     "position": {
       "x": -90.0,
@@ -39,6 +43,8 @@
     "id": 3,
     "name": "Lote 3",
     "area": 550,
+    "block": "1",
+    "zone": "1",
     "state": "RESERVADO",
     "position": {
       "x": -50.0,
@@ -60,6 +66,8 @@
     "id": 4,
     "name": "Lote 4",
     "area": 700,
+    "block": "1",
+    "zone": "1",
     "state": "DISPONIBLE",
     "position": {
       "x": -15.0,
@@ -78,6 +86,8 @@
     "id": 5,
     "name": "Lote 5",
     "area": 450,
+    "block": "2",
+    "zone": "2",
     "state": "VENDIDO",
     "position": {
       "x": 60.0,
@@ -99,6 +109,8 @@
     "id": 6,
     "name": "Lote 6",
     "area": 800,
+    "block": "2",
+    "zone": "2",
     "state": "DISPONIBLE",
     "position": {
       "x": 100.0,
@@ -117,6 +129,8 @@
     "id": 7,
     "name": "Lote 7",
     "area": 1300,
+    "block": "2",
+    "zone": "2",
     "state": "DISPONIBLE",
     "position": {
       "x": 135.0,
@@ -135,6 +149,8 @@
     "id": 8,
     "name": "Lote 8",
     "area": 600,
+    "block": "3",
+    "zone": "1",
     "state": "VENDIDO",
     "position": {
       "x": -128.0,
@@ -156,6 +172,8 @@
     "id": 9,
     "name": "Lote 9",
     "area": 550,
+    "block": "3",
+    "zone": "1",
     "state": "DISPONIBLE",
     "position": {
       "x": -90.0,
@@ -174,6 +192,8 @@
     "id": 10,
     "name": "Lote 10",
     "area": 700,
+    "block": "3",
+    "zone": "1",
     "state": "RESERVADO",
     "position": {
       "x": -50.0,
@@ -195,6 +215,8 @@
     "id": 11,
     "name": "Lote 11",
     "area": 450,
+    "block": "3",
+    "zone": "1",
     "state": "DISPONIBLE",
     "position": {
       "x": -15.0,
@@ -213,6 +235,8 @@
     "id": 12,
     "name": "Lote 12",
     "area": 180,
+    "block": "4",
+    "zone": "2",
     "state": "VENDIDO",
     "position": {
       "x": 60.0,
@@ -234,6 +258,8 @@
     "id": 13,
     "name": "Lote 13",
     "area": 315,
+    "block": "4",
+    "zone": "2",
     "state": "RESERVADO",
     "position": {
       "x": 100.0,
@@ -255,6 +281,8 @@
     "id": 14,
     "name": "Lote 14",
     "area": 259,
+    "block": "4",
+    "zone": "2",
     "state": "VENDIDO",
     "position": {
       "x": 135.0,

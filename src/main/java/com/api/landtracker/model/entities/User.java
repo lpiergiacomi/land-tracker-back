@@ -1,5 +1,7 @@
 package com.api.landtracker.model.entities;
 
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,10 +13,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
+@Table(name = "user")
 @Getter
 @Setter
 public class User {
@@ -28,11 +34,19 @@ public class User {
     private String password;
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_role",
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "role_id") }
     )
     private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "lot_assignment",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "lot_id") }
+    )
+    private List<Lot> assignedLots = new ArrayList<>();
 }

@@ -35,16 +35,13 @@ public class Reserve implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinColumn(name = "client", nullable = false)
     private Client client;
 
-    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinColumn(name = "lot", nullable = false)
     private Lot lot;
-
-    @Column(name = "number", unique = true)
-    private String number;
 
     @Column(name = "due_date")
     private LocalDate dueDate;
@@ -52,4 +49,7 @@ public class Reserve implements Serializable {
     @Column(name = "creation_date")
     private LocalDate creationDate;
 
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user")
+    private User user;
 }

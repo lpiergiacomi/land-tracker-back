@@ -9,8 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ReserveRepository extends JpaRepository<Reserve, Long> {
-    @Query("SELECT MAX(c.number) FROM Reserve c")
-    String findMaxNumber();
 
     List<Reserve> findReservesByClientId(Long clientId);
 

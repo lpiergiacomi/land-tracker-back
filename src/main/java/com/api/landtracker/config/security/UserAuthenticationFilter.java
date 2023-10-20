@@ -1,6 +1,8 @@
 package com.api.landtracker.config.security;
 
 import com.api.landtracker.model.dto.UserRegisterDTO;
+import com.api.landtracker.model.entities.User;
+import com.api.landtracker.repository.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,10 +11,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import jakarta.servlet.FilterChain;
@@ -20,16 +24,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 
+@RequiredArgsConstructor
 public class UserAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final JwtUtil jwtUtil;
     private final DaoAuthenticationProvider daoAuthenticationProvider;
-
-    public UserAuthenticationFilter(
-            final JwtUtil jwtUtil, final DaoAuthenticationProvider daoAuthenticationProvider) {
-        this.jwtUtil = jwtUtil;
-        this.daoAuthenticationProvider = daoAuthenticationProvider;
-    }
+    private final UserRepository userRepository;
 
     @Override
     public Authentication attemptAuthentication(
@@ -61,7 +61,8 @@ public class UserAuthenticationFilter extends UsernamePasswordAuthenticationFilt
         final String token = jwtUtil.createToken(authResult);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.createObjectNode().put("access-token", token);
+        User loggedUser = this.userRepository.findByUsername(((UserDetails)authResult.getPrincipal()).getUsername()).get();
+        JsonNode jsonNode = objectMapper.createObjectNode().put("access-token", token).put("user-id", loggedUser.getId());
         String jsonString = objectMapper.writeValueAsString(jsonNode);
 
         response.setContentType("application/json");

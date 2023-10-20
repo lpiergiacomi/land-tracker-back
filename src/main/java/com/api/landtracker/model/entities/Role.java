@@ -1,5 +1,6 @@
 package com.api.landtracker.model.entities;
 
+import jakarta.persistence.FetchType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,9 +17,6 @@ public class Role {
 
     @Id
     private Long id;
-
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
 }

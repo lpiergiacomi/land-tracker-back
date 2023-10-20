@@ -1,9 +1,4 @@
 package com.api.landtracker.model.entities;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -18,6 +13,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -38,6 +40,12 @@ public class Lot {
 
     @Column(name = "area")
     private Integer area;
+
+    @Column(name = "block")
+    private String block;
+
+    @Column(name = "zone")
+    private String zone;
 
     @Column(name = "state")
     @Enumerated(EnumType.STRING)
@@ -65,7 +73,7 @@ public class Lot {
     private Boolean hasWater;
 
     @Column(name = "price")
-    private Double price;
+    private BigDecimal price;
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name = "client")
