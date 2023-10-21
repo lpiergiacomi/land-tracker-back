@@ -84,8 +84,16 @@ public class LotService {
         lotRepository.deleteAssignedLotsByUserId(user.getId(), user.getAssignedLotsIds(), user.getAssignedLotsIds().size() == 0);
         User userToSave = userRepository.findById(user.getId()).orElseThrow(() -> new DataValidationException("Usuario inexistente"));
 
-        List<Long> assignedLots = userToSave.getAssignedLots().stream().map(Lot::getId).toList();
+        // reemplazar
+        // List<Long> assignedLots = userToSave.getAssignedLots().stream().map(Lot::getId).toList();
+        // por
+        // List<Lot> assignedLots = lotRepository.findAllByIds(user.getAssignedLotsIds())
 
+        // iría ésto
+        // userToSave.setAssignedLots(assignedLots);
+        // userRepository.save(userToSave);
+
+        // es lo que habría que borrar
         user.getAssignedLotsIds().stream()
                 .filter(lotId -> !assignedLots.contains(lotId))
                 .forEach(lotId -> {
@@ -94,6 +102,7 @@ public class LotService {
                     userToSave.getAssignedLots().add(lotToAdd);
                 });
         userRepository.save(userToSave);
+        //
 
         return user;
     }
