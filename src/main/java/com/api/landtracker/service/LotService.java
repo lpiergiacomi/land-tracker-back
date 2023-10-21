@@ -85,7 +85,7 @@ public class LotService {
         User userToSave = userRepository.findById(user.getId()).orElseThrow(() -> new DataValidationException("Usuario inexistente"));
 
         // reemplazar
-        // List<Long> assignedLots = userToSave.getAssignedLots().stream().map(Lot::getId).toList();
+        List<Long> assignedLots = userToSave.getAssignedLots().stream().map(Lot::getId).toList();
         // por
         // List<Lot> assignedLots = lotRepository.findAllByIds(user.getAssignedLotsIds())
 
