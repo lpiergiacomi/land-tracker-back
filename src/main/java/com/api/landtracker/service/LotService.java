@@ -3,34 +3,35 @@ package com.api.landtracker.service;
 import com.api.landtracker.model.dto.LotDTO;
 import com.api.landtracker.model.dto.UserWithAssignedLotsDTO;
 import com.api.landtracker.model.entities.Lot;
+import com.api.landtracker.model.entities.LotState;
+import com.api.landtracker.model.entities.Reserve;
 import com.api.landtracker.model.entities.User;
 import com.api.landtracker.model.filter.LotFilterParams;
 import com.api.landtracker.model.filter.LotSpecification;
 import com.api.landtracker.model.mappers.LotMapper;
+import com.api.landtracker.model.mappers.ReserveMapper;
 import com.api.landtracker.repository.LotRepository;
+import com.api.landtracker.repository.ReserveRepository;
 import com.api.landtracker.repository.UserRepository;
 import com.api.landtracker.utils.exception.DataValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
-
 import jakarta.transaction.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class LotService {
 
     private final LotRepository lotRepository;
+    private final ReserveRepository reserveRepository;
     private final UserRepository userRepository;
     private final LotMapper lotMapper;
+    private final ReserveMapper reserveMapper;
 
     @Transactional(dontRollbackOn = Exception.class)
     public List<LotDTO> getAllLots() {
@@ -51,11 +52,15 @@ public class LotService {
         Lot lot = lotRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("No se encontró un lote con ese id"));
         LotDTO lotDTO = lotMapper.lotToLotDTO(lot);
+
+        if(lotDTO.getState().equals(LotState.RESERVADO)){
+            Reserve reserve = reserveRepository.findByLotId(lotDTO.getId());
+            lotDTO.setReserve(reserveMapper.reserveToReserveDTO(reserve));
+        }
         return lotDTO;
     }
 
-    @Transactional(dontRollbackOn = Exception.class)
-    public Page<LotDTO> getAllLotsWithFilter(LotFilterParams params, Pageable pageable) {
+    public List<LotDTO> getAllLotsWithFilter(LotFilterParams params) {
 
         Specification<Lot> statesEquals = LotSpecification.stateEqualsIn(params.getStates());
         Specification<Lot> nameLike = LotSpecification.lotNameLike(params.getName());
@@ -64,19 +69,12 @@ public class LotService {
         Specification<Lot> blockLike = LotSpecification.lotBlockLike(params.getName());
         Specification<Lot> zoneLike = LotSpecification.lotZoneLike(params.getName());
 
-        Specification<Lot> priceBetweenMinMax = LotSpecification.priceBetweenMinMax(params.getMinPrice(), params.getMaxPrice());
-
         Page<Lot> lotPage = this.lotRepository.findAll(
                 Specification.where(statesEquals)
-                .and(nameLike.or(municipalAccNumberLike).or(cadastralAccNumberLike).or(blockLike).or(zoneLike))
-                .and(priceBetweenMinMax),
-                pageable);
+                .and(nameLike.or(municipalAccNumberLike).or(cadastralAccNumberLike).or(blockLike).or(zoneLike)),
+                Pageable.unpaged());
 
-        List<LotDTO> result = new ArrayList<>();
-
-        result.addAll(lotMapper.lotsToLotsDTO(lotPage.getContent()));
-
-        return new PageImpl<LotDTO>(result, pageable, lotPage.getTotalElements());
+        return new ArrayList<>(lotMapper.lotsToLotsDTO(lotPage.getContent()));
     }
 
     @Transactional

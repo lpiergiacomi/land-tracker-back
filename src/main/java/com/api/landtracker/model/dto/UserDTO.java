@@ -1,5 +1,6 @@
 package com.api.landtracker.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
+@JsonView(View.Basic.class)
 public class UserDTO {
 
     private Long id;

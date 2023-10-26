@@ -1,6 +1,6 @@
 package com.api.landtracker.model.dto;
 
-import com.api.landtracker.model.entities.User;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonView(View.Basic.class)
 public class ReserveDTO {
 
     private Long id;
