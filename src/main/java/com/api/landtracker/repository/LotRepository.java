@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -18,4 +19,6 @@ public interface LotRepository extends JpaRepository<Lot, Long>, JpaSpecificatio
     @Query(value = "DELETE FROM lot_assignment " +
             "WHERE user_id = :userId AND (:hasLots OR lot_id NOT IN (:lotIds))", nativeQuery = true)
     void deleteAssignedLotsByUserId(Long userId, List<Long> lotIds, boolean hasLots);
+
+    List<Lot> findAllByIdIn(Collection<Long> id);
 }

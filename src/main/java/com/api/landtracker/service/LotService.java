@@ -81,28 +81,14 @@ public class LotService {
 
     @Transactional
     public UserWithAssignedLotsDTO updateAssignedLotsToUser(UserWithAssignedLotsDTO user) throws DataValidationException {
-        lotRepository.deleteAssignedLotsByUserId(user.getId(), user.getAssignedLotsIds(), user.getAssignedLotsIds().size() == 0);
-        User userToSave = userRepository.findById(user.getId()).orElseThrow(() -> new DataValidationException("Usuario inexistente"));
+        lotRepository.deleteAssignedLotsByUserId(user.getId(), user.getAssignedLotsIds(), user.getAssignedLotsIds().isEmpty());
+        User userToSave = userRepository.findById(user.getId()).orElseThrow(
+                () -> new DataValidationException("Usuario inexistente")
+        );
 
-        // reemplazar
-        List<Long> assignedLots = userToSave.getAssignedLots().stream().map(Lot::getId).toList();
-        // por
-        // List<Lot> assignedLots = lotRepository.findAllByIds(user.getAssignedLotsIds())
-
-        // iría ésto
-        // userToSave.setAssignedLots(assignedLots);
-        // userRepository.save(userToSave);
-
-        // es lo que habría que borrar
-        user.getAssignedLotsIds().stream()
-                .filter(lotId -> !assignedLots.contains(lotId))
-                .forEach(lotId -> {
-                    Lot lotToAdd = new Lot();
-                    lotToAdd.setId(lotId);
-                    userToSave.getAssignedLots().add(lotToAdd);
-                });
+        List<Lot> assignedLots = lotRepository.findAllByIdIn(user.getAssignedLotsIds());
+        userToSave.setAssignedLots(assignedLots);
         userRepository.save(userToSave);
-        //
 
         return user;
     }
