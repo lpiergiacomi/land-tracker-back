@@ -46,8 +46,8 @@ public class Reserve implements Serializable {
     @Column(name = "due_date")
     private LocalDate dueDate;
 
-    @Column(name = "creation_date")
-    private LocalDate creationDate;
+    @Column(name = "created_date")
+    private LocalDate createdDate;
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name = "user")

@@ -47,7 +47,7 @@ public class ReserveService {
 
         lot.setState(LotState.RESERVADO);
         LocalDate creationDate = LocalDate.now();
-        newReserve.setCreationDate(creationDate);
+        newReserve.setCreatedDate(creationDate);
         newReserve.setDueDate(creationDate.plusWeeks(1));
         newReserve.setUser(user);
         Client client = new Client();

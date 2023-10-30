@@ -41,7 +41,7 @@ public class ClientController {
         return ok(clients);
     }
     @PostMapping
-    public Client saveClient(@RequestBody Client client) {
+    public Client saveClient(@RequestBody Client client) throws DataValidationException {
         return clientService.saveClient(client);
     }
     @DeleteMapping("/{id}")

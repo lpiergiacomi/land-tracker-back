@@ -3,6 +3,7 @@ package com.api.landtracker.service;
 import com.api.landtracker.model.entities.Client;
 import com.api.landtracker.model.filter.ClientFilterParams;
 import com.api.landtracker.repository.ClientRepository;
+import com.api.landtracker.utils.exception.DataValidationException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -35,7 +36,7 @@ class ClientServiceTest {
     ClientRepository clientRepository;
 
     @Test
-    void saveClient() {
+    void saveClient() throws DataValidationException {
 
         Client client = new Client();
 

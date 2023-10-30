@@ -60,17 +60,6 @@ public class LotSpecification {
                         );
     }
 
-    public static Specification<Lot> priceBetweenMinMax(Double minPrice, Double maxPrice) {
-        return (root, query, builder) -> {
-
-            if (minPrice == null || maxPrice == null) {
-                return builder.conjunction();
-            } else {
-                return builder.between(root.get("price"), minPrice, maxPrice);
-            }
-        };
-    }
-
     public static Specification<Lot> stateEqualsIn(List<LotState> stateNames) {
         return (root, query, builder) -> {
 

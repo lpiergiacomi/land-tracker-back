@@ -1,17 +1,17 @@
 package com.api.landtracker.model.dto;
 
 import com.api.landtracker.model.entities.LotState;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonView(View.Basic.class)
 public class LotDTO {
 
     private Long id;
@@ -28,7 +28,8 @@ public class LotDTO {
     private Double price;
     private String block;
     private String zone;
-    private List<UserDTO> assignedUsers;
+    @JsonView(View.Extended.class)
+    private ReserveDTO reserve;
 
 
 }

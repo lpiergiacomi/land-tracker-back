@@ -11,6 +11,7 @@ import com.api.landtracker.repository.ReserveRepository;
 import com.api.landtracker.utils.exception.DataValidationException;
 import com.api.landtracker.utils.exception.RecordNotFoundHttpException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -28,10 +29,14 @@ public class ClientService {
     private final LotRepository lotRepository;
     private final ReserveRepository reserveRepository;
 
-    @Transactional
-    public Client saveClient(Client client){
-        clientRepository.save(client);
-        return client;
+    @Transactional(rollbackOn = Exception.class)
+    public Client saveClient(Client client) throws DataValidationException {
+        try {
+            clientRepository.save(client);
+            return client;
+        } catch (DataIntegrityViolationException exception) {
+            throw new DataValidationException("Ya existe un cliente con ese email");
+        }
     }
 
     public List<Client> getAllClients() {
