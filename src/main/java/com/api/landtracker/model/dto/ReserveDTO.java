@@ -21,5 +21,6 @@ public class ReserveDTO {
     private String lotName;
     private String clientName;
     private LocalDate dueDate;
+    private LocalDate createdDate;
     private UserDTO user;
 }
