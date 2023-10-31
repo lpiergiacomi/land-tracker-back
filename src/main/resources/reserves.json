@@ -11,7 +11,8 @@
     "createdDate": "2023-09-25",
     "user": {
       "id": 1
-    }
+    },
+    "state": "ABONADA"
   },
   {
     "id": 2,
@@ -25,7 +26,8 @@
     "createdDate": "2023-09-25",
     "user": {
       "id": 1
-    }
+    },
+    "state": "VENCIDA"
   },
   {
     "id": 3,
@@ -39,6 +41,7 @@
     "createdDate": "2023-09-25",
     "user": {
       "id": 2
-    }
+    },
+    "state": "PENDIENTE_DE_PAGO"
   }
 ]
