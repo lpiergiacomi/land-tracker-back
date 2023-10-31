@@ -1,5 +1,7 @@
 package com.api.landtracker.model.entities;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,6 +36,10 @@ public class Reserve implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column(name = "state")
+    @Enumerated(EnumType.STRING)
+    private ReserveState state;
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinColumn(name = "client", nullable = false)

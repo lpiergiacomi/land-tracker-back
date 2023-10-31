@@ -48,11 +48,10 @@ public class ReserveService {
         lot.setState(LotState.RESERVADO);
         LocalDate creationDate = LocalDate.now();
         newReserve.setCreatedDate(creationDate);
-        newReserve.setDueDate(creationDate.plusWeeks(1));
         newReserve.setUser(user);
+        newReserve.setState(ReserveState.PENDIENTE_DE_PAGO);
         Client client = new Client();
         client.setId(reserve.getClientId());
-        lot.setClient(client);
         lotRepository.save(lot);
         return mapper.reserveToReserveDTO(reserveRepository.save(newReserve));
     }
