@@ -21,8 +21,8 @@ public class FileController {
     private final FileService fileService;
 
     @PostMapping("/upload")
-    public ResponseFile uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
-        return fileService.store(file);
+    public ResponseFile uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("lotId") Long lotId) throws IOException {
+        return fileService.store(file, lotId);
     }
 
     @GetMapping("/list")

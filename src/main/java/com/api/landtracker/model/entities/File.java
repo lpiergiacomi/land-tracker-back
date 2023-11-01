@@ -25,11 +25,15 @@ public class File {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] data;
 
+    @Column(name = "lot_id")
+    private Long lotId;
 
-    public File(String name, String type, byte[] data) {
+
+    public File(String name, String type, byte[] data, Long lotId) {
         this.name = name;
         this.type = type;
         this.data = data;
+        this.lotId = lotId;
     }
 
 }

@@ -19,9 +19,9 @@ public class FileService {
 
     private final FileRepository fileRepository;
 
-    public ResponseFile store(MultipartFile inputFile) throws IOException {
+    public ResponseFile store(MultipartFile inputFile, Long lotId) throws IOException {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(inputFile.getOriginalFilename()));
-        File dbFile = fileRepository.save(new File(fileName, inputFile.getContentType(), inputFile.getBytes()));
+        File dbFile = fileRepository.save(new File(fileName, inputFile.getContentType(), inputFile.getBytes(), lotId));
 
         return new ResponseFile(
                 dbFile.getName(),
