@@ -3,6 +3,8 @@ package com.api.landtracker.controller;
 import com.api.landtracker.model.entities.File;
 import com.api.landtracker.model.entities.ResponseFile;
 import com.api.landtracker.service.FileService;
+import com.api.landtracker.utils.ApiResponse;
+import com.api.landtracker.utils.exception.DataValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/files")
@@ -52,6 +56,12 @@ public class FileController {
                 dbFile.getId(),
                 dbFile.getType(),
                 dbFile.getData().length)).collect(Collectors.toList());
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<String>> deleteClient(@PathVariable String id) throws DataValidationException {
+        fileService.deleteFile(id);
+        ApiResponse<String> response = new ApiResponse<>("success", "ok", "");
+        return ok(response);
     }
 
 }
