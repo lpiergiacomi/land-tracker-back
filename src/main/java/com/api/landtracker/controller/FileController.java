@@ -44,4 +44,14 @@ public class FileController {
                 .body(file.getData());
     }
 
+    @GetMapping("/list/{lotId}")
+    public List<ResponseFile> getListFilesByLotId(@PathVariable Long lotId) {
+
+        return fileService.getListFilesByLotId(lotId).map(dbFile -> new ResponseFile(
+                dbFile.getName(),
+                dbFile.getId(),
+                dbFile.getType(),
+                dbFile.getData().length)).collect(Collectors.toList());
+    }
+
 }

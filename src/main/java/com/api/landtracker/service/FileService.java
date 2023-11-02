@@ -38,4 +38,8 @@ public class FileService {
     public Stream<File> getAllFiles() {
         return fileRepository.findAll().stream();
     }
+
+    public Stream<File> getListFilesByLotId(Long lotId) {
+        return fileRepository.findByLotId(lotId).stream();
+    }
 }
