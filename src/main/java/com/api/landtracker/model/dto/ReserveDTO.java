@@ -1,5 +1,6 @@
 package com.api.landtracker.model.dto;
 
+import com.api.landtracker.model.entities.ReserveState;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ public class ReserveDTO {
     private Long lotId;
     private String lotName;
     private String clientName;
+    private ReserveState state;
     private LocalDate dueDate;
     private LocalDate createdDate;
     private UserDTO user;
