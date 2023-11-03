@@ -58,7 +58,7 @@ public class FileController {
                 dbFile.getData().length)).collect(Collectors.toList());
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<String>> deleteClient(@PathVariable String id) throws DataValidationException {
+    public ResponseEntity<ApiResponse<String>> deleteFile(@PathVariable String id) {
         fileService.deleteFile(id);
         ApiResponse<String> response = new ApiResponse<>("success", "ok", "");
         return ok(response);

@@ -1,12 +1,8 @@
 package com.api.landtracker.service;
 
-import com.api.landtracker.model.entities.Client;
 import com.api.landtracker.model.entities.File;
-import com.api.landtracker.model.entities.Lot;
-import com.api.landtracker.model.entities.Reserve;
 import com.api.landtracker.model.entities.ResponseFile;
 import com.api.landtracker.repository.FileRepository;
-import com.api.landtracker.utils.exception.DataValidationException;
 import com.api.landtracker.utils.exception.RecordNotFoundHttpException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +10,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
