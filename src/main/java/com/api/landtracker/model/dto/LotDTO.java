@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,6 +32,7 @@ public class LotDTO {
     private String zone;
     @JsonView(View.Extended.class)
     private ReserveDTO reserve;
+    private List<PaymentDTO> payments;
 
 
 }

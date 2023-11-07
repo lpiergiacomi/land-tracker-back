@@ -1,5 +1,7 @@
 package com.api.landtracker.model.entities;
 
+import com.api.landtracker.model.dto.View;
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "files")
+@JsonView(View.Basic.class)
 public class File {
     @Id
     @GeneratedValue(generator = "uuid")
