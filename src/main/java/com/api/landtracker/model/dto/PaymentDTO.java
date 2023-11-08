@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -24,4 +25,5 @@ public class PaymentDTO {
     private BigDecimal amount;
     private String username;
     private ResponseFile file;
+    private LocalDate createdDate;
 }

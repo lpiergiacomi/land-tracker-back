@@ -13,8 +13,8 @@ import java.util.Optional;
 public interface PaymentRepository extends JpaRepository<Payment, Long>{
 
     @Override
-    @EntityGraph(attributePaths = {"client", "user"})
     @NonNull
+    @EntityGraph(attributePaths = {"client", "user", "file"})
     Optional<Payment> findById(@NonNull Long id);
 
     List<Payment> findAllByLotId(Long id);
