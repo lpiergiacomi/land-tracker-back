@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +34,7 @@ public class PaymentService {
         Lot lot = this.lotRepository.findById(payment.getLotId()).orElseThrow(
                 () -> new DataValidationException("No se encontró el lote"));
 
-        this.validateLot(lot, payment.getAmount());
+        this.validateLot(lot, payment);
         File insertedFile = null;
 
         if (file != null) {
@@ -42,7 +43,8 @@ public class PaymentService {
             insertedFile.setId(responseFile.getId());
         }
 
-        payment.setClientId(this.reserveRepository.findByLotId(payment.getLotId()).getClient().getId());
+        Reserve reserve = this.reserveRepository.findByLotId(payment.getLotId());
+        payment.setClientId(reserve.getClient().getId());
         Payment paymentToSave = this.paymentMapper.paymentDTOToPayment(payment);
         paymentToSave.setFile(insertedFile);
         paymentToSave.setCreatedDate(LocalDate.now());
@@ -50,33 +52,57 @@ public class PaymentService {
         Payment insertedPayment = this.paymentRepository.saveAndFlush(paymentToSave);
         this.entityManager.refresh(insertedPayment);
 
-        this.checkStateChange(lot);
+        this.checkStateChangeLot(lot);
+        this.checkStateChangeReserve(reserve, payment);
 
         Payment response = this.paymentRepository.findById(insertedPayment.getId()).orElseThrow();
         return this.paymentMapper.paymentToPaymentDTO(response);
     }
 
-    private void validateLot(Lot lot, BigDecimal newAmount) throws DataValidationException {
+    private void validateLot(Lot lot, PaymentDTO payment) throws DataValidationException {
         if (lot.getState() != LotState.RESERVADO) {
             throw new DataValidationException("El lote no se encuentra en un estado para añadirle un pago");
         }
         BigDecimal sumOfPayments = getSumOfPayments(lot);
-        if (sumOfPayments.add(newAmount).compareTo(lot.getPrice()) > 0) {
+        if (sumOfPayments.add(payment.getAmount()).compareTo(lot.getPrice()) > 0) {
             throw new DataValidationException("Estás superando el precio del lote");
+        }
+        if (payment.getReason().equals(PaymentReason.RESERVA) && havePaymentForReserve(lot)) {
+            throw new DataValidationException("Ya existe un pago en concepto de reserva");
         }
     }
 
-    private BigDecimal getSumOfPayments(Lot lot) {
-        return this.paymentRepository.findAllByLotId(lot.getId())
-                .stream().map(Payment::getAmount)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    private List<Payment> getPaymentsByLot(Lot lot) {
+        return this.paymentRepository.findAllByLotId(lot.getId());
     }
 
-    private void checkStateChange(Lot lot) {
+    private BigDecimal getSumOfPayments(Lot lot) {
+        List<Payment> payments = this.getPaymentsByLot(lot);
+        return payments.stream().map(Payment::getAmount)
+                       .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    private boolean havePaymentForReserve(Lot lot) {
+        return this.getPaymentsByLot(lot).stream().anyMatch(payment -> payment.getReason().equals(PaymentReason.RESERVA));
+    }
+
+    private void checkStateChangeLot(Lot lot) {
         BigDecimal sumOfPayments = getSumOfPayments(lot);
         if (sumOfPayments.compareTo(lot.getPrice()) == 0) {
             lot.setState(LotState.VENDIDO);
             lotRepository.save(lot);
         }
+    }
+
+    private void checkStateChangeReserve(Reserve reserve, PaymentDTO payment) {
+        if (payment.getReason().equals(PaymentReason.RESERVA)) {
+            reserve.setState(ReserveState.ABONADA);
+            reserveRepository.save(reserve);
+        }
+    }
+
+    public List<PaymentDTO> getByLotId(Long lotId) {
+        List<Payment> payments = this.paymentRepository.findAllByLotId(lotId);
+        return paymentMapper.paymentsToPaymentsDTO(payments);
     }
 }

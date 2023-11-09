@@ -1,5 +1,6 @@
 package com.api.landtracker.model.dto;
 
+import com.api.landtracker.model.entities.PaymentReason;
 import com.api.landtracker.model.entities.ResponseFile;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
@@ -26,4 +27,5 @@ public class PaymentDTO {
     private String username;
     private ResponseFile file;
     private LocalDate createdDate;
+    private PaymentReason reason;
 }

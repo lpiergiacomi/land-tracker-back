@@ -17,5 +17,6 @@ public interface PaymentRepository extends JpaRepository<Payment, Long>{
     @EntityGraph(attributePaths = {"client", "user", "file"})
     Optional<Payment> findById(@NonNull Long id);
 
+    @EntityGraph(attributePaths = {"client", "user"})
     List<Payment> findAllByLotId(Long id);
 }
