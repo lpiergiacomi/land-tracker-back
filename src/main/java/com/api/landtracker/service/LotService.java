@@ -58,7 +58,7 @@ public class LotService {
                 () -> new RuntimeException("No se encontró un lote con ese id"));
         LotDTO lotDTO = lotMapper.lotToLotDTO(lot);
 
-        if(lotDTO.getState().equals(LotState.RESERVADO)){
+        if(!lotDTO.getState().equals(LotState.DISPONIBLE)){
             Reserve reserve = reserveRepository.findByLotId(lotDTO.getId());
             lotDTO.setReserve(reserveMapper.reserveToReserveDTO(reserve));
 
