@@ -43,5 +43,65 @@
       "id": 2
     },
     "state": "PENDIENTE_DE_PAGO"
+  },
+  {
+    "id": 4,
+    "client": {
+      "id": 2
+    },
+    "lot": {
+      "id": 5
+    },
+    "dueDate": "2023-08-17",
+    "createdDate": "2023-08-12",
+    "user": {
+      "id": 1
+    },
+    "state": "ABONADA"
+  },
+  {
+    "id": 5,
+    "client": {
+      "id": 7
+    },
+    "lot": {
+      "id": 8
+    },
+    "dueDate": "2023-02-23",
+    "createdDate": "2022-09-25",
+    "user": {
+      "id": 1
+    },
+    "state": "ABONADA"
+  },
+  {
+    "id": 6,
+    "client": {
+      "id": 4
+    },
+    "lot": {
+      "id": 12
+    },
+    "dueDate": "2023-07-09",
+    "createdDate": "2022-01-09",
+    "user": {
+      "id": 1
+    },
+    "state": "ABONADA"
+  },
+  {
+    "id": 7,
+    "client": {
+      "id": 5
+    },
+    "lot": {
+      "id": 14
+    },
+    "dueDate": "2023-11-30",
+    "createdDate": "2023-05-25",
+    "user": {
+      "id": 1
+    },
+    "state": "ABONADA"
   }
 ]

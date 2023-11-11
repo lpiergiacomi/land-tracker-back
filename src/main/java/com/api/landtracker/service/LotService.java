@@ -4,13 +4,16 @@ import com.api.landtracker.model.dto.LotDTO;
 import com.api.landtracker.model.dto.UserWithAssignedLotsDTO;
 import com.api.landtracker.model.entities.Lot;
 import com.api.landtracker.model.entities.LotState;
+import com.api.landtracker.model.entities.Payment;
 import com.api.landtracker.model.entities.Reserve;
 import com.api.landtracker.model.entities.User;
 import com.api.landtracker.model.filter.LotFilterParams;
 import com.api.landtracker.model.filter.LotSpecification;
 import com.api.landtracker.model.mappers.LotMapper;
+import com.api.landtracker.model.mappers.PaymentMapper;
 import com.api.landtracker.model.mappers.ReserveMapper;
 import com.api.landtracker.repository.LotRepository;
+import com.api.landtracker.repository.PaymentRepository;
 import com.api.landtracker.repository.ReserveRepository;
 import com.api.landtracker.repository.UserRepository;
 import com.api.landtracker.utils.exception.DataValidationException;
@@ -28,6 +31,8 @@ import java.util.List;
 public class LotService {
 
     private final LotRepository lotRepository;
+    private final PaymentRepository paymentRepository;
+    private final PaymentMapper paymentMapper;
     private final ReserveRepository reserveRepository;
     private final UserRepository userRepository;
     private final LotMapper lotMapper;
@@ -53,9 +58,13 @@ public class LotService {
                 () -> new RuntimeException("No se encontró un lote con ese id"));
         LotDTO lotDTO = lotMapper.lotToLotDTO(lot);
 
-        if(lotDTO.getState().equals(LotState.RESERVADO)){
+        if(!lotDTO.getState().equals(LotState.DISPONIBLE)){
             Reserve reserve = reserveRepository.findByLotId(lotDTO.getId());
             lotDTO.setReserve(reserveMapper.reserveToReserveDTO(reserve));
+
+            List<Payment> payments = paymentRepository.findAllByLotId(lotDTO.getId());
+
+            lotDTO.setPayments(paymentMapper.paymentsToPaymentsDTO(payments));
         }
         return lotDTO;
     }

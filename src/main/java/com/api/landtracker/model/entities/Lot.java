@@ -72,4 +72,9 @@ public class Lot {
     @JoinColumn(name = "files", referencedColumnName = "id")
     private List<File> files;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "lot_id", referencedColumnName = "id")
+    private List<Payment> items;
+
+
 }
