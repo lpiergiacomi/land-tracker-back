@@ -68,7 +68,6 @@ public class LotControllerTest {
 
         when(lotService.getAllLots()).thenReturn(lots);
 
-        //when
         mockMvc.perform(get("/lots"))
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$.length()", is(lots.size())));
