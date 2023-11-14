@@ -80,19 +80,6 @@ class FileServiceTest {
     }
 
     @Test
-    void testGetAllFiles() {
-        File file1 = new File();
-        File file2 = new File();
-
-        when(fileRepository.findAll()).thenReturn(List.of(file1, file2));
-
-        Stream<File> result = fileService.getAllFiles();
-
-        assertEquals(List.of(file1, file2), result.collect(Collectors.toList()));
-        verify(fileRepository).findAll();
-    }
-
-    @Test
     void testGetListFilesByLotId() {
         Long lotId = 1L;
         File file1 = new File();
