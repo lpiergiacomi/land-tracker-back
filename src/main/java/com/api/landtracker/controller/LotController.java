@@ -1,5 +1,6 @@
 package com.api.landtracker.controller;
 
+import com.api.landtracker.model.dto.IPieChartData;
 import com.api.landtracker.model.dto.LotDTO;
 import com.api.landtracker.model.dto.UserWithAssignedLotsDTO;
 import com.api.landtracker.model.dto.View;
@@ -52,5 +53,10 @@ public class LotController {
     public UserWithAssignedLotsDTO updateAssignedLotsToUser(@RequestBody UserWithAssignedLotsDTO user) throws DataValidationException {
         return lotService.updateAssignedLotsToUser(user);
     }
+
+   @GetMapping("/lots-quantity-by-state")
+   public List<IPieChartData> getLotsQuantityByState() {
+        return lotService.getLotsQuantityByState();
+   }
 
 }
