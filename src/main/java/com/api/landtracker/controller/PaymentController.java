@@ -36,9 +36,4 @@ public class PaymentController {
 
         return this.paymentService.savePayment(paymentDTO, file);
     }
-
-    @GetMapping("/lot/{lotId}")
-    public List<PaymentDTO> getByLotId(@PathVariable Long lotId) {
-        return paymentService.getByLotId(lotId);
-    }
 }

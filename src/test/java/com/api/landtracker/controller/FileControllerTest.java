@@ -83,35 +83,6 @@ public class FileControllerTest {
     }
 
     @Test
-    void getListFilesTest() throws Exception {
-        File file1 = new File("file1.txt", "text/plain", "Hello, World!".getBytes(), 1L);
-        file1.setId("File1");
-        File file2 = new File("file2.txt", "text/plain", "Test content".getBytes(), 2L);
-        file2.setId("File2");
-        List<File> files = Arrays.asList(
-                file1,
-                file2
-        );
-
-        when(fileService.getAllFiles()).thenReturn(files.stream());
-
-        mockMvc.perform(get("/files/list")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()", is(files.size())))
-                .andExpect(jsonPath("$[0].name").value("file1.txt"))
-                .andExpect(jsonPath("$[0].id").value("File1"))
-                .andExpect(jsonPath("$[0].type").value("text/plain"))
-                .andExpect(jsonPath("$[0].size").value(13))
-                .andExpect(jsonPath("$[1].name").value("file2.txt"))
-                .andExpect(jsonPath("$[1].id").value("File2"))
-                .andExpect(jsonPath("$[1].type").value("text/plain"))
-                .andExpect(jsonPath("$[1].size").value(12));
-
-        verify(fileService, times(1)).getAllFiles();
-    }
-
-    @Test
     void getListFilesByLotIdTest() throws Exception {
         Long lotId = 1L;
         File file1 = new File("file1.txt", "text/plain", "Hello, World!".getBytes(), 1L);

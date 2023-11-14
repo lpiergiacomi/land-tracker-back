@@ -29,16 +29,6 @@ public class FileController {
         return fileService.store(file, lotId);
     }
 
-    @GetMapping("/list")
-    public List<ResponseFile> getListFiles() {
-
-        return fileService.getAllFiles().map(dbFile -> new ResponseFile(
-                dbFile.getName(),
-                dbFile.getId(),
-                dbFile.getType(),
-                dbFile.getData().length)).collect(Collectors.toList());
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable String id) {
         File file = fileService.getFile(id);

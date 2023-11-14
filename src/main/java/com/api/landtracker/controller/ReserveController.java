@@ -17,13 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReserveController {
 
-
     private final ReserveService reserveService;
-
-    @GetMapping
-    public List<ReserveDTO> getAllReserves() {
-        return reserveService.getAllReserves();
-    }
 
     @PostMapping
     public ReserveDTO saveReserve(@RequestBody ReserveDTO reserve) throws DataValidationException {

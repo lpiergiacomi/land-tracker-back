@@ -100,9 +100,4 @@ public class PaymentService {
             reserveRepository.save(reserve);
         }
     }
-
-    public List<PaymentDTO> getByLotId(Long lotId) {
-        List<Payment> payments = this.paymentRepository.findAllByLotId(lotId);
-        return paymentMapper.paymentsToPaymentsDTO(payments);
-    }
 }
