@@ -36,10 +36,6 @@ public class UserService {
         }
     }
 
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
     public List<UserWithAssignedLotsDTO> getAllUsersWithAssignedLots() {
         List<IUserWithAssignedLots> usersWithAssignedLots = userRepository.getUserOrUsersWithAssignedLots(null);
         List<UserWithAssignedLotsDTO> usersWithAssignedLotsImpl = new ArrayList<>();
