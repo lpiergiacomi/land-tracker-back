@@ -1,0 +1,249 @@
+[
+  {
+    "id": 1,
+    "amount": 22000,
+    "createdDate": "2023-09-25T17:00:00",
+    "lotId": 3,
+    "client": {
+      "id": 1
+    },
+    "user": {
+      "id": 1
+    },
+    "reason": "RESERVA"
+  },
+  {
+    "id": 2,
+    "amount": 50000,
+    "createdDate": "2023-11-01T15:38:00",
+    "lotId": 10,
+    "client": {
+      "id": 2
+    },
+    "user": {
+      "id": 2
+    },
+    "reason": "RESERVA"
+  },
+  {
+    "id": 3,
+    "amount": 10000,
+    "createdDate": "2023-11-17T15:38:00",
+    "lotId": 10,
+    "client": {
+      "id": 2
+    },
+    "user": {
+      "id": 2
+    },
+    "reason": "CUOTA"
+  },
+  {
+    "id": 4,
+    "amount": 10000,
+    "createdDate": "2023-02-23T12:00:00",
+    "lotId": 13,
+    "client": {
+      "id": 3
+    },
+    "user": {
+      "id": 2
+    },
+    "reason": "ADELANTO"
+  },
+  {
+    "id": 5,
+    "amount": 50000,
+    "createdDate": "2023-03-23T12:00:00",
+    "lotId": 13,
+    "client": {
+      "id": 3
+    },
+    "user": {
+      "id": 2
+    },
+    "reason": "RESERVA"
+  },
+  {
+    "id": 6,
+    "amount": 15000,
+    "createdDate": "2023-05-30T12:00:00",
+    "lotId": 13,
+    "client": {
+      "id": 3
+    },
+    "user": {
+      "id": 2
+    },
+    "reason": "CUOTA"
+  },
+  {
+    "id": 7,
+    "amount": 15000,
+    "createdDate": "2023-06-30T12:00:00",
+    "lotId": 13,
+    "client": {
+      "id": 3
+    },
+    "user": {
+      "id": 2
+    },
+    "reason": "CUOTA"
+  },
+  {
+    "id": 8,
+    "amount": 45000,
+    "createdDate": "2023-02-28T17:45:00",
+    "lotId": 5,
+    "client": {
+      "id": 4
+    },
+    "user": {
+      "id": 2
+    },
+    "reason": "RESERVA"
+  },
+  {
+    "id": 9,
+    "amount": 10000,
+    "createdDate": "2023-03-28T17:45:00",
+    "lotId": 5,
+    "client": {
+      "id": 4
+    },
+    "user": {
+      "id": 2
+    },
+    "reason": "CUOTA"
+  },
+  {
+    "id": 10,
+    "amount": 1000,
+    "createdDate": "2023-04-03T18:45:00",
+    "lotId": 5,
+    "client": {
+      "id": 4
+    },
+    "user": {
+      "id": 2
+    },
+    "reason": "OTRO"
+  },
+  {
+    "id": 11,
+    "amount": 18000,
+    "createdDate": "2023-05-07T18:42:00",
+    "lotId": 5,
+    "client": {
+      "id": 4
+    },
+    "user": {
+      "id": 2
+    },
+    "reason": "CUOTA"
+  },
+  {
+    "id": 12,
+    "amount": 16000,
+    "createdDate": "2023-06-07T13:21:00",
+    "lotId": 5,
+    "client": {
+      "id": 4
+    },
+    "user": {
+      "id": 2
+    },
+    "reason": "OTRO"
+  },
+  {
+    "id": 13,
+    "amount": 58000,
+    "createdDate": "2023-04-13T19:18:00",
+    "lotId": 8,
+    "client": {
+      "id": 5
+    },
+    "user": {
+      "id": 2
+    },
+    "reason": "RESERVA"
+  },
+  {
+    "id": 14,
+    "amount": 30000,
+    "createdDate": "2023-06-17T17:14:00",
+    "lotId": 8,
+    "client": {
+      "id": 5
+    },
+    "user": {
+      "id": 2
+    },
+    "reason": "CUOTA"
+  },
+  {
+    "id": 15,
+    "amount": 5000,
+    "createdDate": "2023-01-01T14:28:00",
+    "lotId": 12,
+    "client": {
+      "id": 6
+    },
+    "user": {
+      "id": 1
+    },
+    "reason": "RESERVA"
+  },
+  {
+    "id": 16,
+    "amount": 4000,
+    "createdDate": "2023-02-01T19:57:00",
+    "lotId": 12,
+    "client": {
+      "id": 6
+    },
+    "user": {
+      "id": 1
+    },
+    "reason": "CUOTA"
+  },
+  {
+    "id": 17,
+    "amount": 35000,
+    "createdDate": "2023-07-22T21:06:00",
+    "lotId": 14,
+    "client": {
+      "id": 7
+    },
+    "user": {
+      "id": 1
+    },
+    "reason": "RESERVA"
+  },
+  {
+    "id": 19,
+    "amount": 15000,
+    "createdDate": "2023-09-09T09:12:00",
+    "lotId": 14,
+    "client": {
+      "id": 7
+    },
+    "user": {
+      "id": 1
+    },
+    "reason": "OTRO"
+  },
+  {
+    "id": 20,
+    "amount": 20000,
+    "createdDate": "2023-11-14T14:09:00",
+    "lotId": 14,
+    "client": {
+      "id": 7
+    },
+    "user": {
+      "id": 1
+    },
+    "reason": "CUOTA"
+  }
+]

@@ -1,13 +1,7 @@
 package com.api.landtracker.init;
 
-import com.api.landtracker.model.entities.Client;
-import com.api.landtracker.model.entities.Lot;
-import com.api.landtracker.model.entities.Reserve;
-import com.api.landtracker.model.entities.User;
-import com.api.landtracker.repository.ClientRepository;
-import com.api.landtracker.repository.LotRepository;
-import com.api.landtracker.repository.ReserveRepository;
-import com.api.landtracker.repository.UserRepository;
+import com.api.landtracker.model.entities.*;
+import com.api.landtracker.repository.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -29,6 +23,7 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     private final ClientRepository clientRepository;
     private final ReserveRepository reserveRepository;
     private final UserRepository userRepository;
+    private final PaymentRepository paymentRepository;
     private final ObjectMapper objectMapper;
 
     @Override
@@ -37,6 +32,7 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
         cargarDesdeJson("lots.json", Lot.class, lotRepository);
         cargarDesdeJson("users.json", User.class, userRepository);
         cargarDesdeJson("reserves.json", Reserve.class, reserveRepository);
+        cargarDesdeJson("payments.json", Payment.class, paymentRepository);
     }
 
     private <T> void cargarDesdeJson(String jsonFilePath, Class<?> clase,  JpaRepository<T, ?> repository) {
