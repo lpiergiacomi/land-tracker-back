@@ -15,8 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
+import java.time.*;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -47,7 +47,7 @@ public class PaymentService {
         payment.setClientId(reserve.getClient().getId());
         Payment paymentToSave = this.paymentMapper.paymentDTOToPayment(payment);
         paymentToSave.setFile(insertedFile);
-        paymentToSave.setCreatedDate(LocalDate.now());
+        paymentToSave.setCreatedDate(LocalDateTime.now());
 
         Payment insertedPayment = this.paymentRepository.saveAndFlush(paymentToSave);
         this.entityManager.refresh(insertedPayment);
@@ -90,6 +90,7 @@ public class PaymentService {
         BigDecimal sumOfPayments = getSumOfPayments(lot);
         if (sumOfPayments.compareTo(lot.getPrice()) == 0) {
             lot.setState(LotState.VENDIDO);
+            lot.setSaleDate(new Date());
             lotRepository.save(lot);
         }
     }
