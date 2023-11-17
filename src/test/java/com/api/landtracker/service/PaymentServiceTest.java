@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -126,7 +126,7 @@ class PaymentServiceTest {
         Payment payment = new Payment();
         payment.setId(1L);
         payment.setAmount(BigDecimal.TEN);
-        payment.setCreatedDate(LocalDate.now());
+        payment.setCreatedDate(LocalDateTime.now());
         payment.setReason(PaymentReason.RESERVA);
         return payment;
     }
