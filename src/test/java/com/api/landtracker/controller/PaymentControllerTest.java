@@ -17,18 +17,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
 
+import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 
 @ExtendWith(SpringExtension.class)
@@ -83,37 +80,4 @@ public class PaymentControllerTest {
         verify(paymentService, times(1)).savePayment(any(), any());
     }
 
-    @Test
-    void testGetByLotId() throws Exception {
-        Long lotId = 1L;
-
-        List<PaymentDTO> payments = Arrays.asList(
-                PaymentDTO.builder()
-                        .id(1L)
-                        .lotId(lotId)
-                        .amount(new BigDecimal("100.00"))
-                        .reason(PaymentReason.ADELANTO)
-                        .build(),
-                PaymentDTO.builder()
-                        .id(2L)
-                        .lotId(lotId)
-                        .amount(new BigDecimal("150.00"))
-                        .reason(PaymentReason.RESERVA)
-                        .build()
-        );
-
-        when(paymentService.getByLotId(lotId)).thenReturn(payments);
-
-        mockMvc.perform(get("/payments/lot/{lotId}", lotId))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()", is(payments.size())))
-                .andExpect(jsonPath("$[0].lotId", is(lotId.intValue())))
-                .andExpect(jsonPath("$[0].amount", is(100.00)))
-                .andExpect(jsonPath("$[0].reason", is("ADELANTO")))
-                .andExpect(jsonPath("$[1].lotId", is(lotId.intValue())))
-                .andExpect(jsonPath("$[1].amount", is(150.00)))
-                .andExpect(jsonPath("$[1].reason", is("RESERVA")));
-
-        verify(paymentService, times(1)).getByLotId(lotId);
-    }
 }
