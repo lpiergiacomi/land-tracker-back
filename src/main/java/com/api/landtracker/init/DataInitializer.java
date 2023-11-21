@@ -28,22 +28,30 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-        cargarDesdeJson("clients.json", Client.class, clientRepository);
-        cargarDesdeJson("lots.json", Lot.class, lotRepository);
-        cargarDesdeJson("users.json", User.class, userRepository);
-        cargarDesdeJson("reserves.json", Reserve.class, reserveRepository);
-        cargarDesdeJson("payments.json", Payment.class, paymentRepository);
+        loadFromJson("clients.json", Client.class, clientRepository);
+        List<Lot> lots = loadFromJson("lots.json", Lot.class, lotRepository);
+        List<User> users = loadFromJson("users.json", User.class, userRepository);
+        loadFromJson("reserves.json", Reserve.class, reserveRepository);
+        loadFromJson("payments.json", Payment.class, paymentRepository);
+
+        users.forEach(user -> {
+            user.setAssignedLots(lots);
+        });
+        userRepository.saveAll(users);
+
     }
 
-    private <T> void cargarDesdeJson(String jsonFilePath, Class<?> clase,  JpaRepository<T, ?> repository) {
+    private <T> List<T> loadFromJson(String jsonFilePath, Class<?> className, JpaRepository<T, ?> repository) {
+        List<T> objects = null;
         try {
             ClassPathResource resource = new ClassPathResource(jsonFilePath);
 
-            List<T> objetos = objectMapper.readValue(resource.getInputStream(),
-                    objectMapper.getTypeFactory().constructCollectionType(List.class, clase));
-            repository.saveAll(objetos);
+            objects = objectMapper.readValue(resource.getInputStream(),
+                    objectMapper.getTypeFactory().constructCollectionType(List.class, className));
+            repository.saveAll(objects);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return objects;
     }
 }

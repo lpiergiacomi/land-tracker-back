@@ -183,7 +183,7 @@
   },
   {
     "id": 15,
-    "amount": 5000,
+    "amount": 50000,
     "createdDate": "2023-01-01T14:28:00",
     "lotId": 12,
     "client": {
@@ -196,7 +196,7 @@
   },
   {
     "id": 16,
-    "amount": 4000,
+    "amount": 40000,
     "createdDate": "2023-02-01T19:57:00",
     "lotId": 12,
     "client": {
