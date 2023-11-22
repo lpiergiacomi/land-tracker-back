@@ -1,13 +1,7 @@
 package com.api.landtracker.init;
 
-import com.api.landtracker.model.entities.Client;
-import com.api.landtracker.model.entities.Lot;
-import com.api.landtracker.model.entities.Reserve;
-import com.api.landtracker.model.entities.User;
-import com.api.landtracker.repository.ClientRepository;
-import com.api.landtracker.repository.LotRepository;
-import com.api.landtracker.repository.ReserveRepository;
-import com.api.landtracker.repository.UserRepository;
+import com.api.landtracker.model.entities.*;
+import com.api.landtracker.repository.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -29,25 +23,35 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     private final ClientRepository clientRepository;
     private final ReserveRepository reserveRepository;
     private final UserRepository userRepository;
+    private final PaymentRepository paymentRepository;
     private final ObjectMapper objectMapper;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-        cargarDesdeJson("clients.json", Client.class, clientRepository);
-        cargarDesdeJson("lots.json", Lot.class, lotRepository);
-        cargarDesdeJson("users.json", User.class, userRepository);
-        cargarDesdeJson("reserves.json", Reserve.class, reserveRepository);
+        loadFromJson("clients.json", Client.class, clientRepository);
+        List<Lot> lots = loadFromJson("lots.json", Lot.class, lotRepository);
+        List<User> users = loadFromJson("users.json", User.class, userRepository);
+        loadFromJson("reserves.json", Reserve.class, reserveRepository);
+        loadFromJson("payments.json", Payment.class, paymentRepository);
+
+        users.forEach(user -> {
+            user.setAssignedLots(lots);
+        });
+        userRepository.saveAll(users);
+
     }
 
-    private <T> void cargarDesdeJson(String jsonFilePath, Class<?> clase,  JpaRepository<T, ?> repository) {
+    private <T> List<T> loadFromJson(String jsonFilePath, Class<?> className, JpaRepository<T, ?> repository) {
+        List<T> objects = null;
         try {
             ClassPathResource resource = new ClassPathResource(jsonFilePath);
 
-            List<T> objetos = objectMapper.readValue(resource.getInputStream(),
-                    objectMapper.getTypeFactory().constructCollectionType(List.class, clase));
-            repository.saveAll(objetos);
+            objects = objectMapper.readValue(resource.getInputStream(),
+                    objectMapper.getTypeFactory().constructCollectionType(List.class, className));
+            repository.saveAll(objects);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return objects;
     }
 }

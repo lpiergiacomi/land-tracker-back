@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -63,6 +64,9 @@ public class Lot {
 
     @Column(name = "price")
     private BigDecimal price;
+
+    @Column(name = "saleDate")
+    private Date saleDate;
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name = "client")

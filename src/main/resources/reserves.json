@@ -7,8 +7,8 @@
     "lot": {
       "id": 3
     },
-    "dueDate": "2023-12-31",
-    "createdDate": "2023-09-25",
+    "dueDate": "2023-09-30",
+    "createdDate": "2023-09-24",
     "user": {
       "id": 1
     },
@@ -22,8 +22,8 @@
     "lot": {
       "id": 10
     },
-    "dueDate": "2023-11-30",
-    "createdDate": "2023-09-25",
+    "dueDate": "2023-11-07",
+    "createdDate": "2023-10-01",
     "user": {
       "id": 1
     },
@@ -32,43 +32,43 @@
   {
     "id": 3,
     "client": {
-      "id": 3
-    },
-    "lot": {
-      "id": 13
-    },
-    "dueDate": "2023-10-31",
-    "createdDate": "2023-09-25",
-    "user": {
-      "id": 2
-    },
-    "state": "PENDIENTE_DE_PAGO"
-  },
-  {
-    "id": 4,
-    "client": {
       "id": 2
     },
     "lot": {
-      "id": 5
+      "id": 10
     },
-    "dueDate": "2023-08-17",
-    "createdDate": "2023-08-12",
+    "dueDate": "2023-12-01",
+    "createdDate": "2023-10-01",
     "user": {
       "id": 1
     },
     "state": "ABONADA"
   },
   {
-    "id": 5,
+    "id": 4,
     "client": {
-      "id": 7
+      "id": 3
     },
     "lot": {
-      "id": 8
+      "id": 13
     },
-    "dueDate": "2023-02-23",
-    "createdDate": "2022-09-25",
+    "dueDate": "2023-04-15",
+    "createdDate": "2023-02-15",
+    "user": {
+      "id": 2
+    },
+    "state": "ABONADA"
+  },
+  {
+    "id": 5,
+    "client": {
+      "id": 4
+    },
+    "lot": {
+      "id": 5
+    },
+    "dueDate": "2023-03-30",
+    "createdDate": "2023-02-25",
     "user": {
       "id": 1
     },
@@ -77,13 +77,13 @@
   {
     "id": 6,
     "client": {
-      "id": 4
+      "id": 5
     },
     "lot": {
-      "id": 12
+      "id": 8
     },
-    "dueDate": "2023-07-09",
-    "createdDate": "2022-01-09",
+    "dueDate": "2023-05-01",
+    "createdDate": "2023-04-01",
     "user": {
       "id": 1
     },
@@ -92,16 +92,61 @@
   {
     "id": 7,
     "client": {
-      "id": 5
+      "id": 6
     },
     "lot": {
-      "id": 14
+      "id": 12
     },
-    "dueDate": "2023-11-30",
-    "createdDate": "2023-05-25",
+    "dueDate": "2023-02-01",
+    "createdDate": "2022-12-15",
     "user": {
       "id": 1
     },
     "state": "ABONADA"
+  },
+  {
+    "id": 8,
+    "client": {
+      "id": 7
+    },
+    "lot": {
+      "id": 14
+    },
+    "dueDate": "2023-08-17",
+    "createdDate": "2023-07-20",
+    "user": {
+      "id": 1
+    },
+    "state": "ABONADA"
+  },
+  {
+    "id": 9,
+    "client": {
+      "id": 5
+    },
+    "lot": {
+      "id": 9
+    },
+    "dueDate": "2023-10-01",
+    "createdDate": "2023-09-01",
+    "user": {
+      "id": 1
+    },
+    "state": "VENCIDA"
+  },
+  {
+    "id": 10,
+    "client": {
+      "id": 7
+    },
+    "lot": {
+      "id": 11
+    },
+    "dueDate": "2023-03-18",
+    "createdDate": "2023-03-01",
+    "user": {
+      "id": 1
+    },
+    "state": "VENCIDA"
   }
 ]

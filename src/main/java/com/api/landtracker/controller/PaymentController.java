@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/payments")
@@ -35,10 +35,5 @@ public class PaymentController {
         paymentDTO.setReason(PaymentReason.valueOf(reason.toUpperCase()));
 
         return this.paymentService.savePayment(paymentDTO, file);
-    }
-
-    @GetMapping("/lot/{lotId}")
-    public List<PaymentDTO> getByLotId(@PathVariable Long lotId) {
-        return paymentService.getByLotId(lotId);
     }
 }

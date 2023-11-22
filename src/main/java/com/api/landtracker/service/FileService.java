@@ -35,10 +35,6 @@ public class FileService {
                 () -> new RecordNotFoundHttpException("No existe un archivo con Id: " + id));
     }
 
-    public Stream<File> getAllFiles() {
-        return fileRepository.findAll().stream();
-    }
-
     public Stream<File> getListFilesByLotId(Long lotId) {
         return fileRepository.findByLotId(lotId).stream();
     }

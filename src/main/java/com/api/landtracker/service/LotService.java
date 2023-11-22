@@ -1,5 +1,6 @@
 package com.api.landtracker.service;
 
+import com.api.landtracker.model.dto.IPieChartData;
 import com.api.landtracker.model.dto.LotDTO;
 import com.api.landtracker.model.dto.UserWithAssignedLotsDTO;
 import com.api.landtracker.model.entities.Lot;
@@ -98,5 +99,9 @@ public class LotService {
         userRepository.save(userToSave);
 
         return user;
+    }
+
+    public List<IPieChartData> getLotsQuantityByState() {
+        return lotRepository.getLotsQuantityByState();
     }
 }

@@ -1,5 +1,6 @@
 package com.api.landtracker.repository;
 
+import com.api.landtracker.model.dto.IPieChartData;
 import com.api.landtracker.model.entities.Lot;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -21,4 +22,7 @@ public interface LotRepository extends JpaRepository<Lot, Long>, JpaSpecificatio
     void deleteAssignedLotsByUserId(Long userId, List<Long> lotIds, boolean hasLots);
 
     List<Lot> findAllByIdIn(Collection<Long> id);
+
+    @Query(value = "SELECT state AS label, COUNT(id) AS data FROM lot GROUP BY state", nativeQuery = true)
+    List<IPieChartData> getLotsQuantityByState();
 }
