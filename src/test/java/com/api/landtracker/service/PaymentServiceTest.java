@@ -25,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -69,7 +68,7 @@ class PaymentServiceTest {
         Reserve reserve = createSampleReserve(lot);
 
         when(lotRepository.findById(lotId)).thenReturn(Optional.of(lot));
-        when(reserveRepository.findByLotId(lotId)).thenReturn(reserve);
+        when(reserveRepository.findByLotIdAndStateIsNot(lotId, ReserveState.VENCIDA)).thenReturn(reserve);
         when(paymentRepository.saveAndFlush(any())).thenAnswer(invocationOnMock -> {
             Payment payment = invocationOnMock.getArgument(0);
             payment.setId(1L);
@@ -88,7 +87,7 @@ class PaymentServiceTest {
         assertNotNull(result.getId());
 
         verify(lotRepository, times(1)).findById(lotId);
-        verify(reserveRepository, times(1)).findByLotId(lotId);
+        verify(reserveRepository, times(1)).findByLotIdAndStateIsNot(lotId, ReserveState.VENCIDA);
         verify(paymentRepository, times(1)).saveAndFlush(any());
         verify(fileService, times(0)).store(any(), any());
     }
