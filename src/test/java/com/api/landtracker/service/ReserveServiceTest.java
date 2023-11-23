@@ -131,7 +131,7 @@ public class ReserveServiceTest {
         when(reserveRepository.findById(1L)).thenReturn(Optional.of(reserveToSave));
 
         //when
-        ReserveDTO response = reserveService.updateDueDate(1L, LocalDate.now() );
+        ReserveDTO response = reserveService.updateDueDate(1L, new Date() );
 
         //verify
         verify(reserveRepository).save(reserveToSave);
@@ -144,7 +144,7 @@ public class ReserveServiceTest {
         when(reserveRepository.findById(id)).thenReturn(Optional.empty());
 
         try {
-            reserveService.updateDueDate(1L, LocalDate.now());
+            reserveService.updateDueDate(1L, new Date());
             fail("Se esperaba una DataValidationException");
         } catch (DataValidationException e) {
             assertTrue(true);
