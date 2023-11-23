@@ -28,7 +28,7 @@ public interface DashboardRepository extends JpaRepository<Payment, Long>{
             "select COUNT(id) as title, 'expired_reservations' as guid from reserve where due_date BETWEEN :startDate AND :endDate AND state = 'VENCIDA'\n", nativeQuery = true)
     List<IDashboardCard> getDashboardCardsInfoBetweenDates(LocalDateTime startDate, LocalDateTime endDate);
 
-    @Query(value = "select r.due_date as date, l.name as title, r.id as reserveId \n" +
+    @Query(value = "select r.due_date as date, l.name as title, l.id as lotId, r.id as reserveId \n" +
             "from reserve r \n" +
             "left join lot l on l.id = r.lot \n" +
             "where r.due_date BETWEEN :startDate AND :endDate \n" +

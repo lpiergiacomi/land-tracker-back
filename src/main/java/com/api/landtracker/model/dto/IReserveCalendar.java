@@ -7,4 +7,5 @@ public interface IReserveCalendar {
     String getTitle();
     Date getDate();
     Long getReserveId();
+    Long getLotId();
 }
