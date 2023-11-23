@@ -148,5 +148,65 @@
       "id": 1
     },
     "state": "VENCIDA"
+  },
+  {
+    "id": 11,
+    "client": {
+      "id": 8
+    },
+    "lot": {
+      "id": 15
+    },
+    "dueDate": "2023-12-31",
+    "createdDate": "2023-11-20",
+    "user": {
+      "id": 1
+    },
+    "state": "PENDIENTE_DE_PAGO"
+  },
+  {
+    "id": 12,
+    "client": {
+      "id": 9
+    },
+    "lot": {
+      "id": 16
+    },
+    "dueDate": "2023-11-30",
+    "createdDate": "2023-10-20",
+    "user": {
+      "id": 1
+    },
+    "state": "PENDIENTE_DE_PAGO"
+  },
+  {
+    "id": 13,
+    "client": {
+      "id": 10
+    },
+    "lot": {
+      "id": 18
+    },
+    "dueDate": "2024-01-18",
+    "createdDate": "2023-12-19",
+    "user": {
+      "id": 1
+    },
+    "state": "PENDIENTE_DE_PAGO"
+  },
+  {
+    "id": 14,
+    "client": {
+      "id": 6
+    },
+    "lot": {
+      "id": 20
+    },
+    "dueDate": "2024-01-23",
+    "createdDate": "2024-01-01",
+    "user": {
+      "id": 1
+    },
+    "state": "PENDIENTE_DE_PAGO"
   }
 ]

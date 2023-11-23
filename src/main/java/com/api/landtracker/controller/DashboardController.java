@@ -1,6 +1,7 @@
 package com.api.landtracker.controller;
 
 import com.api.landtracker.model.dto.IDashboardCard;
+import com.api.landtracker.model.dto.IReserveCalendar;
 import com.api.landtracker.model.dto.PaymentChartDTO;
 import com.api.landtracker.model.dto.PaymentDTO;
 import com.api.landtracker.service.DashboardService;
@@ -13,10 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/dashboard")
@@ -35,6 +33,12 @@ public class DashboardController {
     @GetMapping("/cards-info/{timeScale}")
     public List<IDashboardCard> getDashboardCardsInfo(@PathVariable String timeScale) {
         return dashboardService.getDashboardCardsInfo(timeScale);
+    }
+
+    @GetMapping("/reserves-for-calendar")
+    public List<IReserveCalendar> getReservesForCalendar(@RequestParam("startDate") Date startDate,
+                                                         @RequestParam("endDate") Date endDate) {
+        return dashboardService.getReservesForCalendar(startDate, endDate);
     }
 
     private List<PaymentChartDTO> convertPaymentsToChartFormat(List<PaymentDTO> payments, String timeScale) {

@@ -1,6 +1,7 @@
 package com.api.landtracker.repository;
 
 import com.api.landtracker.model.dto.IDashboardCard;
+import com.api.landtracker.model.dto.IReserveCalendar;
 import com.api.landtracker.model.entities.Payment;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -26,4 +28,10 @@ public interface DashboardRepository extends JpaRepository<Payment, Long>{
             "select COUNT(id) as title, 'expired_reservations' as guid from reserve where due_date BETWEEN :startDate AND :endDate AND state = 'VENCIDA'\n", nativeQuery = true)
     List<IDashboardCard> getDashboardCardsInfoBetweenDates(LocalDateTime startDate, LocalDateTime endDate);
 
+    @Query(value = "select r.due_date as date, l.name as title, r.id as reserveId \n" +
+            "from reserve r \n" +
+            "left join lot l on l.id = r.lot \n" +
+            "where r.due_date BETWEEN :startDate AND :endDate \n" +
+            "and r.state = 'PENDIENTE_DE_PAGO'", nativeQuery = true)
+    List<IReserveCalendar> getReservesForCalendar(Date startDate, Date endDate);
 }
