@@ -56,4 +56,10 @@ public class ReserveService {
         return mapper.reserveToReserveDTO(reserveRepository.save(newReserve));
     }
 
+    public ReserveDTO updateDueDate(Long id, LocalDate dueDate) throws DataValidationException {
+        Reserve existentReserve = reserveRepository.findById(id).orElseThrow(
+                () -> new DataValidationException("No se encontró la reserva"));
+        existentReserve.setDueDate(dueDate);
+        return mapper.reserveToReserveDTO(reserveRepository.save(existentReserve));
+    }
 }

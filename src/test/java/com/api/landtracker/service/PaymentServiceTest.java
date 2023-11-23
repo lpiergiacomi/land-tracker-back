@@ -61,7 +61,6 @@ class PaymentServiceTest {
 
     @Test
     void testSavePayment() throws IOException, DataValidationException {
-        // Mock data
         Long lotId = 1L;
         PaymentDTO paymentDTO = createSamplePaymentDTO(lotId);
         MultipartFile file = null;
@@ -82,15 +81,12 @@ class PaymentServiceTest {
         when(paymentRepository.findById(any())).thenReturn(Optional.of(payment));
 
 
-        // Realizamos la llamada al servicio
         PaymentDTO result = paymentService.savePayment(paymentDTO, file);
 
-        // Verify the results
         assertNotNull(result);
         assertEquals(paymentDTO.getAmount(), result.getAmount());
-        assertNotNull(result.getId()); // Aseguramos que el identificador no sea nulo
+        assertNotNull(result.getId());
 
-        // Verificamos que los métodos necesarios hayan sido llamados
         verify(lotRepository, times(1)).findById(lotId);
         verify(reserveRepository, times(1)).findByLotId(lotId);
         verify(paymentRepository, times(1)).saveAndFlush(any());
@@ -120,14 +116,5 @@ class PaymentServiceTest {
                 .lot(lot)
                 .state(ReserveState.PENDIENTE_DE_PAGO)
                 .build();
-    }
-
-    private Payment createSamplePayment() {
-        Payment payment = new Payment();
-        payment.setId(1L);
-        payment.setAmount(BigDecimal.TEN);
-        payment.setCreatedDate(LocalDateTime.now());
-        payment.setReason(PaymentReason.RESERVA);
-        return payment;
     }
 }

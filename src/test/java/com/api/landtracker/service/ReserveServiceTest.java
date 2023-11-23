@@ -15,12 +15,17 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -101,7 +106,50 @@ public class ReserveServiceTest {
         //verify
         verify(reserveRepository).save(reserveToSave);
         assertEquals(reserveDTO, response);
+    }
 
+    @Test
+    public void testUpdateDueDate() throws DataValidationException {
+        Client client = Client.builder().id(1L).name("Cliente 1").build();
+        Lot lot = Lot.builder().id(1L).name("Lote 1").state(LotState.DISPONIBLE).build();
+        User user = new User();
+        user.setId(1L);
+        user.setAssignedLots(Collections.singletonList(lot));
 
+        Reserve reserveToSave = Reserve.builder()
+                .id(1L)
+                .dueDate(LocalDate.now())
+                .client(client)
+                .lot(lot)
+                .user(user)
+                .build();
+
+        ReserveDTO reserveDTO = reserveMapper.reserveToReserveDTO(reserveToSave);
+
+        when(reserveMapper.reserveToReserveDTO(reserveToSave)).thenReturn(reserveDTO);
+        when(reserveRepository.save(reserveToSave)).thenReturn(reserveToSave);
+        when(reserveRepository.findById(1L)).thenReturn(Optional.of(reserveToSave));
+
+        //when
+        ReserveDTO response = reserveService.updateDueDate(1L, LocalDate.now() );
+
+        //verify
+        verify(reserveRepository).save(reserveToSave);
+        assertEquals(reserveDTO.getDueDate(), response.getDueDate());
+    }
+
+    @Test
+    void testUpdateDueDate_ThrowsDataValidationException() {
+        Long id = 1L;
+        when(reserveRepository.findById(id)).thenReturn(Optional.empty());
+
+        try {
+            reserveService.updateDueDate(1L, LocalDate.now());
+            fail("Se esperaba una DataValidationException");
+        } catch (DataValidationException e) {
+            assertTrue(true);
+        }
+
+        verify(reserveRepository, times(1)).findById(id);
     }
 }
