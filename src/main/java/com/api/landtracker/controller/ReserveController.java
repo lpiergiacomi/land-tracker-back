@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/reserves")
@@ -28,7 +27,7 @@ public class ReserveController {
         return reserveService.saveReserve(reserve);
     }
     @PutMapping("/update-due-date/{id}")
-    public ReserveDTO updateDueDate(@PathVariable Long id, @RequestParam LocalDate dueDate) throws DataValidationException {
+    public ReserveDTO updateDueDate(@PathVariable Long id, @RequestParam Date dueDate) throws DataValidationException {
         return reserveService.updateDueDate(id, dueDate);
     }
 }
