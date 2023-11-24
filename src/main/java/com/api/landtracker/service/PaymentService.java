@@ -43,7 +43,7 @@ public class PaymentService {
             insertedFile.setId(responseFile.getId());
         }
 
-        Reserve reserve = this.reserveRepository.findByLotId(payment.getLotId());
+        Reserve reserve = this.reserveRepository.findByLotIdAndStateIsNot(payment.getLotId(), ReserveState.VENCIDA);
         payment.setClientId(reserve.getClient().getId());
         Payment paymentToSave = this.paymentMapper.paymentDTOToPayment(payment);
         paymentToSave.setFile(insertedFile);

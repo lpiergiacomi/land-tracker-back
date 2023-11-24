@@ -13,10 +13,9 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -56,4 +55,16 @@ public class ReserveService {
         return mapper.reserveToReserveDTO(reserveRepository.save(newReserve));
     }
 
+    @Transactional
+    public ReserveDTO updateDueDate(Long id, Date dueDate) throws DataValidationException {
+        LocalDate localDueDate = dueDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        Reserve existentReserve = reserveRepository.findById(id).orElseThrow(
+                () -> new DataValidationException("No se encontró la reserva"));
+        if (localDueDate.isBefore(LocalDate.now())) {
+            throw new DataValidationException("La fecha no puede ser anterior al día de hoy");
+        }
+        existentReserve.setDueDate(localDueDate);
+        return mapper.reserveToReserveDTO(reserveRepository.save(existentReserve));
+    }
 }

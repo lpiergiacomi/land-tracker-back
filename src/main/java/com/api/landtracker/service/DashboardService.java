@@ -1,6 +1,7 @@
 package com.api.landtracker.service;
 
 import com.api.landtracker.model.dto.IDashboardCard;
+import com.api.landtracker.model.dto.IReserveCalendar;
 import com.api.landtracker.model.dto.PaymentDTO;
 import com.api.landtracker.model.entities.*;
 import com.api.landtracker.model.mappers.PaymentMapper;
@@ -12,6 +13,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.time.*;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -58,6 +60,10 @@ public class DashboardService {
             default:
                 return new DatesByTimeScaleWrapper(startDateTime, endDateTime);
         }
+    }
+
+    public List<IReserveCalendar> getReservesForCalendar(Date startDate, Date endDate) {
+        return dashboardRepository.getReservesForCalendar(startDate, endDate);
     }
 
     @Getter

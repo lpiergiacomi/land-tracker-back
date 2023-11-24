@@ -7,6 +7,7 @@ import com.api.landtracker.model.entities.Lot;
 import com.api.landtracker.model.entities.LotState;
 import com.api.landtracker.model.entities.Payment;
 import com.api.landtracker.model.entities.Reserve;
+import com.api.landtracker.model.entities.ReserveState;
 import com.api.landtracker.model.entities.User;
 import com.api.landtracker.model.filter.LotFilterParams;
 import com.api.landtracker.model.filter.LotSpecification;
@@ -60,7 +61,7 @@ public class LotService {
         LotDTO lotDTO = lotMapper.lotToLotDTO(lot);
 
         if(!lotDTO.getState().equals(LotState.DISPONIBLE)){
-            Reserve reserve = reserveRepository.findByLotId(lotDTO.getId());
+            Reserve reserve = reserveRepository.findByLotIdAndStateIsNot(lotDTO.getId(), ReserveState.VENCIDA);
             lotDTO.setReserve(reserveMapper.reserveToReserveDTO(reserve));
 
             List<Payment> payments = paymentRepository.findAllByLotId(lotDTO.getId());
