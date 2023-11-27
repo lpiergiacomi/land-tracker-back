@@ -43,33 +43,23 @@ public class DashboardController {
 
     private List<PaymentChartDTO> convertPaymentsToChartFormat(List<PaymentDTO> payments, String timeScale) {
         List<PaymentChartDTO> chartData = new ArrayList<>();
+        Map<String, BigDecimal> paymentsByTimeScale = groupPaymentsByTimeScale(payments, timeScale);
 
-        if (timeScale.equals("day")) {
-            Map<String, BigDecimal> paymentsByHour = groupPaymentsByHour(payments);
-            for (Map.Entry<String, BigDecimal> entry : paymentsByHour.entrySet()) {
-                chartData.add(new PaymentChartDTO(entry.getKey(), entry.getValue()));
-            }
-        }
-        if (timeScale.equals("week")) {
-            Map<String, BigDecimal> paymentsByDayOfWeek = groupPaymentsByDayOfWeek(payments);
-            for (Map.Entry<String, BigDecimal> entry : paymentsByDayOfWeek.entrySet()) {
-                chartData.add(new PaymentChartDTO(entry.getKey(), entry.getValue()));
-            }
-        }
-        if (timeScale.equals("month")) {
-            Map<String, BigDecimal> paymentsByDayOfMonth = groupPaymentsByDayOfMonth(payments);
-            for (Map.Entry<String, BigDecimal> entry : paymentsByDayOfMonth.entrySet()) {
-                chartData.add(new PaymentChartDTO(entry.getKey(), entry.getValue()));
-            }
-        }
-        if (timeScale.equals("year")) {
-            Map<String, BigDecimal> paymentsByMonthOfYear = groupPaymentsByMonthOfYear(payments);
-            for (Map.Entry<String, BigDecimal> entry : paymentsByMonthOfYear.entrySet()) {
-                chartData.add(new PaymentChartDTO(entry.getKey(), entry.getValue()));
-            }
+        for (Map.Entry<String, BigDecimal> entry : paymentsByTimeScale.entrySet()) {
+            chartData.add(new PaymentChartDTO(entry.getKey(), entry.getValue()));
         }
 
         return chartData;
+    }
+
+    private Map<String, BigDecimal> groupPaymentsByTimeScale(List<PaymentDTO> payments, String timeScale) {
+        return switch (timeScale) {
+            case "day" -> groupPaymentsByHour(payments);
+            case "week" -> groupPaymentsByDayOfWeek(payments);
+            case "month" -> groupPaymentsByDayOfMonth(payments);
+            case "year" -> groupPaymentsByMonthOfYear(payments);
+            default -> Collections.emptyMap();
+        };
     }
 
     public Map<String, BigDecimal> groupPaymentsByHour(List<PaymentDTO> payments) {
