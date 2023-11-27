@@ -26,6 +26,4 @@ jobs:
         run: mvn clean install
 
       # Send JaCoCo reports to codecov
-      - run: bash <(curl -s https://codecov.io/bash) -X gcov -f '!src/main/java/com/api/landtracker/init/**'
-
-
+      - run: bash <(curl -s https://codecov.io/bash)
