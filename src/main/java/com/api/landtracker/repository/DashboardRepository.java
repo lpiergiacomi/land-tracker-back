@@ -31,7 +31,8 @@ public interface DashboardRepository extends JpaRepository<Payment, Long>{
     @Query(value = "select r.due_date as date, l.name as title, l.id as lotId, r.id as reserveId \n" +
             "from reserve r \n" +
             "left join lot l on l.id = r.lot \n" +
+            "inner join lot_assignment la on la.lot_id = l.id \n" +
             "where r.due_date BETWEEN :startDate AND :endDate \n" +
-            "and r.state = 'PENDIENTE_DE_PAGO'", nativeQuery = true)
-    List<IReserveCalendar> getReservesForCalendar(Date startDate, Date endDate);
+            "and r.state = 'PENDIENTE_DE_PAGO' and la.user_id = :userId", nativeQuery = true)
+    List<IReserveCalendar> getReservesForCalendar(Date startDate, Date endDate, Long userId);
 }

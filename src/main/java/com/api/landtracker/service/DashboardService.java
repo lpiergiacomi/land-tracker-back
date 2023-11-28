@@ -62,8 +62,8 @@ public class DashboardService {
         }
     }
 
-    public List<IReserveCalendar> getReservesForCalendar(Date startDate, Date endDate) {
-        return dashboardRepository.getReservesForCalendar(startDate, endDate);
+    public List<IReserveCalendar> getReservesForCalendar(Date startDate, Date endDate, Long userId) {
+        return dashboardRepository.getReservesForCalendar(startDate, endDate, userId);
     }
 
     @Getter

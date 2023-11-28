@@ -37,8 +37,9 @@ public class DashboardController {
 
     @GetMapping("/reserves-for-calendar")
     public List<IReserveCalendar> getReservesForCalendar(@RequestParam("startDate") Date startDate,
-                                                         @RequestParam("endDate") Date endDate) {
-        return dashboardService.getReservesForCalendar(startDate, endDate);
+                                                         @RequestParam("endDate") Date endDate,
+                                                         @RequestParam("userId") Long userId) {
+        return dashboardService.getReservesForCalendar(startDate, endDate, userId);
     }
 
     private List<PaymentChartDTO> convertPaymentsToChartFormat(List<PaymentDTO> payments, String timeScale) {
