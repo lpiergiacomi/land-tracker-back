@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface LotRepository extends JpaRepository<Lot, Long>, JpaSpecificationExecutor<Lot> {
@@ -25,4 +26,7 @@ public interface LotRepository extends JpaRepository<Lot, Long>, JpaSpecificatio
 
     @Query(value = "SELECT state AS label, COUNT(id) AS data FROM lot GROUP BY state", nativeQuery = true)
     List<IPieChartData> getLotsQuantityByState();
+
+    @Query(value = "SELECT lot_id as id FROM lot_assignment WHERE lot_id = :lotId AND user_id = :userId", nativeQuery = true)
+    Optional<Long> findAssignmentLotByUserId(Long lotId, Long userId);
 }

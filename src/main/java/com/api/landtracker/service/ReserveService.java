@@ -56,14 +56,17 @@ public class ReserveService {
     }
 
     @Transactional
-    public ReserveDTO updateDueDate(Long id, Date dueDate) throws DataValidationException {
+    public ReserveDTO updateDueDate(Long reserveId, Date dueDate, Long lotId, Long userId)
+            throws DataValidationException {
         LocalDate localDueDate = dueDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        Reserve existentReserve = reserveRepository.findById(id).orElseThrow(
+        Reserve existentReserve = reserveRepository.findById(reserveId).orElseThrow(
                 () -> new DataValidationException("No se encontró la reserva"));
         if (localDueDate.isBefore(LocalDate.now())) {
             throw new DataValidationException("La fecha no puede ser anterior al día de hoy");
         }
+        lotRepository.findAssignmentLotByUserId(lotId, userId).orElseThrow(
+                () -> new DataValidationException("No tenés permisos para gestionar este lote"));
         existentReserve.setDueDate(localDueDate);
         return mapper.reserveToReserveDTO(reserveRepository.save(existentReserve));
     }
