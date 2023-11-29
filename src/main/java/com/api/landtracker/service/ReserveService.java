@@ -1,7 +1,9 @@
 package com.api.landtracker.service;
 
+import com.api.landtracker.model.dto.LotDTO;
 import com.api.landtracker.model.dto.ReserveDTO;
 import com.api.landtracker.model.entities.*;
+import com.api.landtracker.model.mappers.LotMapper;
 import com.api.landtracker.model.mappers.ReserveMapper;
 import com.api.landtracker.repository.LotRepository;
 import com.api.landtracker.repository.ReserveRepository;
@@ -16,6 +18,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +28,7 @@ public class ReserveService {
     private final LotRepository lotRepository;
     private final UserRepository userRepository;
     private final ReserveMapper mapper;
+    private final LotMapper lotMapper;
 
     public List<ReserveDTO> getAllReserves() {
         List<Reserve> reserves = (List<Reserve>) reserveRepository.findAll();
@@ -65,9 +69,28 @@ public class ReserveService {
         if (localDueDate.isBefore(LocalDate.now())) {
             throw new DataValidationException("La fecha no puede ser anterior al día de hoy");
         }
-        lotRepository.findAssignmentLotByUserId(lotId, userId).orElseThrow(
-                () -> new DataValidationException("No tenés permisos para gestionar este lote"));
+        validateLotAssignment(lotId, userId);
         existentReserve.setDueDate(localDueDate);
         return mapper.reserveToReserveDTO(reserveRepository.save(existentReserve));
+    }
+
+    @Transactional
+    public LotDTO cancel(Long reserveId, Long lotId, Long userId) throws DataValidationException {
+        Reserve existentReserve = reserveRepository.findById(reserveId).orElseThrow(
+                () -> new DataValidationException("No se encontró la reserva"));
+        Lot lot = lotRepository.findById(lotId).orElseThrow(
+                () -> new DataValidationException("No se encontró el lote"));
+        validateLotAssignment(lotId, userId);
+        if (lot.getState() != LotState.RESERVADO) {
+            throw new DataValidationException("El lote no se encuentra reservado");
+        }
+        lot.setState(LotState.DISPONIBLE);
+        reserveRepository.delete(existentReserve);
+        return lotMapper.lotToLotDTO(lotRepository.save(lot));
+    }
+
+    private void validateLotAssignment(Long lotId, Long userId) throws DataValidationException {
+        lotRepository.findAssignmentLotByUserId(lotId, userId).orElseThrow(
+                () -> new DataValidationException("No tenés permisos para gestionar este lote"));
     }
 }

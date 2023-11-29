@@ -129,9 +129,9 @@ public class ReserveServiceTest {
         when(reserveMapper.reserveToReserveDTO(reserveToSave)).thenReturn(reserveDTO);
         when(reserveRepository.save(reserveToSave)).thenReturn(reserveToSave);
         when(reserveRepository.findById(1L)).thenReturn(Optional.of(reserveToSave));
-
+        when(lotRepository.findAssignmentLotByUserId(1L, 1L)).thenReturn(Optional.of(1L));
         //when
-        ReserveDTO response = reserveService.updateDueDate(1L, new Date() );
+        ReserveDTO response = reserveService.updateDueDate(1L, new Date(), 1L, 1L );
 
         //verify
         verify(reserveRepository).save(reserveToSave);
@@ -144,7 +144,7 @@ public class ReserveServiceTest {
         when(reserveRepository.findById(id)).thenReturn(Optional.empty());
 
         try {
-            reserveService.updateDueDate(1L, new Date());
+            reserveService.updateDueDate(1L, new Date(),1L,1L);
             fail("Se esperaba una DataValidationException");
         } catch (DataValidationException e) {
             assertTrue(true);

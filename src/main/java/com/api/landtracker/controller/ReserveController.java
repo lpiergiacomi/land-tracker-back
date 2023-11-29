@@ -1,5 +1,6 @@
 package com.api.landtracker.controller;
 
+import com.api.landtracker.model.dto.LotDTO;
 import com.api.landtracker.model.dto.ReserveDTO;
 import com.api.landtracker.service.ReserveService;
 import com.api.landtracker.utils.exception.DataValidationException;
@@ -31,5 +32,12 @@ public class ReserveController {
                                     @RequestParam Long lotId,
                                     @RequestParam Long userId) throws DataValidationException {
         return reserveService.updateDueDate(reserveId, dueDate, lotId, userId);
+    }
+
+    @PutMapping("/cancel/{reserveId}")
+    public LotDTO cancel(@PathVariable Long reserveId,
+                         @RequestParam Long lotId,
+                         @RequestParam Long userId) throws DataValidationException {
+        return reserveService.cancel(reserveId, lotId, userId);
     }
 }
