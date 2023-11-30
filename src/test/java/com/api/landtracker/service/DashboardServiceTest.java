@@ -69,6 +69,34 @@ class DashboardServiceTest {
     }
 
     @Test
+    void testGetPaymentsByTimeScaleMonth() {
+        String timeScale = "month";
+
+        when(dashboardRepository.findByCreatedDateBetween(any(), any()))
+                .thenReturn(Collections.emptyList());
+
+        List<PaymentDTO> result = dashboardService.getPaymentsByTimeScale(timeScale);
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+
+        verify(dashboardRepository, times(1)).findByCreatedDateBetween(any(), any());
+    }
+
+    @Test
+    void testGetPaymentsByTimeScaleYear() {
+        String timeScale = "year";
+
+        when(dashboardRepository.findByCreatedDateBetween(any(), any()))
+                .thenReturn(Collections.emptyList());
+
+        List<PaymentDTO> result = dashboardService.getPaymentsByTimeScale(timeScale);
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+
+        verify(dashboardRepository, times(1)).findByCreatedDateBetween(any(), any());
+    }
+
+    @Test
     void testGetDashboardCardsInfo() {
         String timeScale = "week";
 
