@@ -22,3 +22,4 @@ slack_app: true
 ignore:
   - "src/main/java/com/api/landtracker/init/**"
   - "src/main/java/com/api/landtracker/config/**"
+  - "src/main/java/com/api/landtracker/utils/**"
