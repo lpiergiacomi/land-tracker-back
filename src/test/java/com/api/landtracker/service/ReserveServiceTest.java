@@ -1,7 +1,10 @@
 package com.api.landtracker.service;
 
+import com.api.landtracker.model.dto.LotDTO;
 import com.api.landtracker.model.dto.ReserveDTO;
 import com.api.landtracker.model.entities.*;
+import com.api.landtracker.model.mappers.LotMapper;
+import com.api.landtracker.model.mappers.LotMapperImpl;
 import com.api.landtracker.model.mappers.ReserveMapper;
 import com.api.landtracker.model.mappers.ReserveMapperImpl;
 import com.api.landtracker.repository.LotRepository;
@@ -23,8 +26,12 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -43,6 +50,8 @@ public class ReserveServiceTest {
     private UserRepository userRepository;
     @Spy
     private ReserveMapper reserveMapper = new ReserveMapperImpl();
+    @Spy
+    private LotMapper lotMapper = new LotMapperImpl();
 
     @Test
     public void testGetAllReserves() {
@@ -151,5 +160,65 @@ public class ReserveServiceTest {
         }
 
         verify(reserveRepository, times(1)).findById(id);
+    }
+
+    @Test
+    void testCancel() throws DataValidationException {
+        Long reserveId = 1L;
+        Long lotId = 1L;
+        Long userId = 1L;
+
+        User user = new User();
+        user.setId(userId);
+
+        Lot lot = Lot.builder().id(lotId).state(LotState.RESERVADO).build();
+        Reserve reserve = Reserve.builder().id(reserveId).user(user).lot(lot).state(ReserveState.PENDIENTE_DE_PAGO).build();
+
+        when(reserveRepository.findById(reserveId)).thenReturn(Optional.of(reserve));
+        when(lotRepository.findAssignmentLotByUserId(1L, 1L)).thenReturn(Optional.of(1L));
+        when(lotRepository.findById(lotId)).thenReturn(Optional.of(lot));
+        when(lotRepository.save(lot)).thenReturn(lot);
+
+        LotDTO result = reserveService.cancel(reserveId, lotId, userId);
+
+        verify(reserveRepository, times(1)).findById(reserveId);
+        verify(lotRepository, times(1)).findById(lotId);
+        verify(lotRepository, times(1)).save(lot);
+
+        assertEquals(LotState.DISPONIBLE, result.getState());
+    }
+
+    @Test
+    void testCancel_ReserveNotFound() {
+        Long reserveId = 1L;
+        Long lotId = 1L;
+        Long userId = 1L;
+
+        when(reserveRepository.findById(reserveId)).thenReturn(Optional.empty());
+
+        assertThrows(DataValidationException.class, () -> reserveService.cancel(reserveId, lotId, userId));
+
+        verify(reserveRepository, times(1)).findById(reserveId);
+        verify(lotRepository, never()).findById(anyLong());
+        verify(lotRepository, never()).save(any(Lot.class));
+    }
+
+    @Test
+    void testCancel_LotNotFound() {
+        Long reserveId = 1L;
+        Long lotId = 1L;
+        Long userId = 1L;
+
+        User user = new User();
+        user.setId(userId);
+
+        when(reserveRepository.findById(reserveId)).thenReturn(Optional.of(new Reserve()));
+        when(lotRepository.findById(lotId)).thenReturn(Optional.empty());
+
+        assertThrows(DataValidationException.class, () -> reserveService.cancel(reserveId, lotId, userId));
+
+        verify(reserveRepository, times(1)).findById(reserveId);
+        verify(lotRepository, times(1)).findById(lotId);
+        verify(lotRepository, never()).save(any(Lot.class));
     }
 }
